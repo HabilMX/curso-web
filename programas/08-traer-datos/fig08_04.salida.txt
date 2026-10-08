@@ -1,0 +1,4 @@
+Fig. 8.4 — leer como JSON algo que no lo es
+código: 200, ok: true
+tipo: text/html
+SyntaxError: Unexpected token '<', "<!-- fig08"... is not valid JSON

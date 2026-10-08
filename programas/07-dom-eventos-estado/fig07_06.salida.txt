@@ -1,0 +1,2 @@
+Tras hacer clic sobre el ícono del botón «Ver Pagos»:
+Presionaste: Pagos (target: <span>)

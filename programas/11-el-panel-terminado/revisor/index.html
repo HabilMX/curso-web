@@ -1,0 +1,140 @@
+<!-- revisor/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revisor de servicios</title>
+  <meta name="description" content="Panel que muestra el estado y el tiempo de respuesta de una lista de servicios.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="modulepreload" href="js/state.js">
+  <link rel="modulepreload" href="js/filters.js">
+  <link rel="modulepreload" href="js/view.js">
+  <link rel="modulepreload" href="js/stats.js">
+  <link rel="modulepreload" href="js/load.js">
+  <link rel="modulepreload" href="js/form.js">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Revisor de servicios</h1>
+    <p class="last-check">Última revisión: <span id="checked-at">todavía no</span></p>
+    <nav>
+      <p>Ir a: <a href="#summary">Resumen</a> o <a href="#services">Servicios</a></p>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section id="summary">
+      <h2>Resumen</h2>
+      <dl class="summary">
+        <div>
+          <dt>Servicios revisados</dt>
+          <dd id="summary-total"></dd>
+        </div>
+        <div>
+          <dt>Disponibles</dt>
+          <dd id="summary-available"></dd>
+        </div>
+        <div>
+          <dt>Caídos</dt>
+          <dd id="summary-down"></dd>
+        </div>
+        <div>
+          <dt>Respuesta promedio</dt>
+          <dd id="summary-average"></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="services" class="layout-tall">
+      <h2>Servicios</h2>
+
+      <!-- Las dos zonas de aviso existen desde el principio: así los lectores de pantalla
+           las vigilan antes de que aparezca el primer mensaje. -->
+      <p id="notice" class="notice" role="status">Cargando servicios…</p>
+      <p id="error-notice" class="notice notice-error" role="alert"></p>
+      <button type="button" id="retry" hidden>Reintentar</button>
+
+      <div id="data-zone" hidden>
+        <div class="controls">
+          <p class="field">
+            <label for="search">Buscar servicio</label>
+            <input type="search" id="search" name="search">
+          </p>
+
+          <fieldset id="status-filter">
+            <legend>Mostrar</legend>
+            <label><input type="radio" name="filter" value="all" checked> Todos</label>
+            <label><input type="radio" name="filter" value="available"> Disponibles</label>
+            <label><input type="radio" name="filter" value="down"> Caídos</label>
+          </fieldset>
+
+          <p><button type="button" id="check-now">Revisar ahora</button></p>
+          <p><button type="button" id="sort" aria-pressed="false">Ordenar por tiempo de respuesta</button></p>
+        </div>
+
+        <p id="count" class="notice" role="status"></p>
+
+        <div class="table-scroll" id="table-zone" role="region" aria-labelledby="table-caption" tabindex="0">
+          <table>
+            <caption id="table-caption">Estado de los servicios en la última revisión</caption>
+            <thead>
+              <tr>
+                <th scope="col">Servicio</th>
+                <th scope="col">Estado</th>
+                <th scope="col" class="number">Tiempo de respuesta</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="services-body"></tbody>
+          </table>
+        </div>
+
+        <p id="detail" role="status"></p>
+      </div>
+    </section>
+
+    <section id="add-zone" aria-labelledby="add-title" hidden>
+      <h2 id="add-title">Agregar un servicio</h2>
+      <p>Los campos marcados con * son obligatorios.</p>
+
+      <form id="add-form" class="form-grid" autocomplete="off">
+        <div class="field">
+          <label for="new-name">Nombre *</label>
+          <input id="new-name" name="name" type="text" required minlength="2"
+                 pattern="\S(.*\S)?" aria-describedby="new-name-hint new-name-error">
+          <p id="new-name-hint" class="hint">Al menos 2 caracteres. No puede repetirse.</p>
+          <p id="new-name-error" class="field-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="new-status">Estado *</label>
+          <select id="new-status" name="status" required aria-describedby="new-status-error">
+            <option value="">Elige un estado</option>
+            <option value="available">Disponible</option>
+            <option value="down">Caído</option>
+          </select>
+          <p id="new-status-error" class="field-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="new-response-ms">Tiempo de respuesta (ms) *</label>
+          <input id="new-response-ms" name="responseMs" type="number" required min="0" max="60000" step="1"
+                 aria-describedby="new-response-ms-hint new-response-ms-error">
+          <p id="new-response-ms-hint" class="hint">De 0 a 60 000. Si el servicio está caído, no se pide.</p>
+          <p id="new-response-ms-error" class="field-error"></p>
+        </div>
+
+        <button type="submit">Agregar servicio</button>
+        <p id="form-result" class="notice" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Datos de ejemplo del archivo data/services.json.</p>
+  </footer>
+</body>
+</html>

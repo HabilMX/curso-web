@@ -1,0 +1,34 @@
+<!-- fig08_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 8.2 — un 404 no rechaza la promesa</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 8.2 — un 404 no rechaza la promesa</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+    const lines = [];
+
+    fetch("missing.json")
+      .then((response) => {
+        lines.push("la promesa SE CUMPLIÓ (no se rechazó)");
+        lines.push(`estado HTTP: ${response.status}`);
+        lines.push(`ok: ${response.ok}`);
+      })
+      .catch((error) => {
+        lines.push(`la promesa se rechazó: ${error.message}`);   // esto NO se ejecuta con un 404
+      })
+      .finally(() => {
+        output.textContent = lines.join("\n");
+      });
+  </script>
+</body>
+</html>

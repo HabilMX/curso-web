@@ -1,0 +1,58 @@
+<!-- fig04_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Los dos ejes de Flexbox</title>
+  <link rel="stylesheet" href="fig04_01/styles.css">
+  <style>
+    .box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      height: 9rem;
+      padding: 0.5rem;
+      background: var(--color-surface);
+      border: 2px dashed var(--color-border);
+    }
+
+    .box > div {
+      padding: 0.5rem 1rem;
+      color: #ffffff;
+      background: var(--color-accent);
+      border-radius: var(--radius);
+    }
+
+    .box > div:nth-child(2) { height: 5rem; }
+    .box > div:nth-child(3) { height: 2.5rem; }
+
+    .box-column {
+      flex-direction: column;
+      align-items: flex-start;
+      height: 14rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Los dos ejes</h1>
+
+    <h2>flex-direction: row (el eje principal es horizontal)</h2>
+    <div class="box">
+      <div>Uno</div>
+      <div>Dos</div>
+      <div>Tres</div>
+    </div>
+
+    <h2>flex-direction: column (el eje principal es vertical)</h2>
+    <div class="box box-column">
+      <div>Uno</div>
+      <div>Dos</div>
+      <div>Tres</div>
+    </div>
+  </main>
+</body>
+</html>

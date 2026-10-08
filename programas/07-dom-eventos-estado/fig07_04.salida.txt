@@ -1,0 +1,6 @@
+Lista visible:
+• Catálogo
+• Pagos
+• <img src="x" onerror="document.title = 'Se ejecutó código que venía en un dato'">
+
+Título de la pestaña: Fig. 7.4 — textContent con un dato de fuera

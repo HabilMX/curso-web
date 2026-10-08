@@ -1,0 +1,32 @@
+<!-- fig07_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.3 — innerHTML con un dato de fuera (INSEGURO)</title>
+</head>
+<body>
+  <main>
+    <h1>Servicios (versión insegura, solo para ver el problema)</h1>
+    <ul id="list"></ul>
+  </main>
+
+  <script type="module">
+    // El tercer nombre lo escribió otra persona, no tú. Es un dato de fuera.
+    const services = [
+      { name: "Catálogo" },
+      { name: "Pagos" },
+      { name: `<img src="x" onerror="document.title = 'Se ejecutó código que venía en un dato'">` },
+    ];
+
+    const list = document.querySelector("#list");
+    for (const service of services) {
+      const item = document.createElement("li");
+      item.innerHTML = service.name;   // <-- el navegador INTERPRETA el texto como HTML
+      list.append(item);
+    }
+  </script>
+</body>
+</html>

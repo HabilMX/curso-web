@@ -1,0 +1,2 @@
+La política no arregla el innerHTML
+Imágenes inyectadas: 1. Título de la página: La política no arregla el innerHTML

@@ -1,0 +1,11 @@
+El mínimo de un elemento flex
+Inventario
+
+https://inventario.example.com/salud/v2/estado-completo
+
+Caído
+Inventario
+
+https://inventario.example.com/salud/v2/estado-completo
+
+Caído

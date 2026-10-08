@@ -1,0 +1,34 @@
+<!-- fig08_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 8.1 — fetch en dos pasos</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 8.1 — fetch en dos pasos</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+    const lines = [];
+
+    fetch("panel/data/services.json")                   // paso 1: llega la respuesta
+      .then((response) => {
+        lines.push(`estado HTTP: ${response.status}`);
+        lines.push(`ok: ${response.ok}`);
+        lines.push(`tipo de contenido: ${response.headers.get("content-type")}`);
+        return response.json();                         // paso 2: se lee el cuerpo (otra promesa)
+      })
+      .then((services) => {
+        lines.push(`servicios recibidos: ${services.length}`);
+        lines.push(`el primero: ${services[0].name}`);
+        output.textContent = lines.join("\n");
+      });
+  </script>
+</body>
+</html>

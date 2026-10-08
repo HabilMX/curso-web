@@ -1,0 +1,8 @@
+120
+Se atrapó un Error: Se esperaba un número y llegó: rápido
+El programa sigue.
+Sin conexión
+1,860
+950
+5 4
+available down Correo

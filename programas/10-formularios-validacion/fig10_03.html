@@ -1,0 +1,55 @@
+<!-- fig10_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>:invalid contra :user-invalid</title>
+  <link rel="icon" href="data:,">
+  <style>
+    input { font: inherit; padding: 0.5rem; border: 3px solid #8a949e; }
+    #old-field:invalid { border-color: #b3261e; }
+    #new-field:user-invalid { border-color: #b3261e; }
+    pre { background: #f4f6f8; padding: 0.75rem; overflow-wrap: anywhere; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>:invalid contra :user-invalid</h1>
+
+    <form id="form">
+      <p>
+        <label for="old-field">Con :invalid (rojo desde que abres la página)</label><br>
+        <input id="old-field" required>
+      </p>
+      <p>
+        <label for="new-field">Con :user-invalid (rojo cuando la persona ya intervino)</label><br>
+        <input id="new-field" required>
+      </p>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Lo que el navegador sabe</h2>
+    <pre id="report" role="status"></pre>
+  </main>
+
+  <script type="module">
+    const form = document.getElementById("form");
+    const newField = document.getElementById("new-field");
+    const report = document.getElementById("report");
+
+    function show() {
+      report.textContent =
+        `valueMissing: ${newField.validity.valueMissing}\n` +
+        `:invalid: ${newField.matches(":invalid")}\n` +
+        `:user-invalid: ${newField.matches(":user-invalid")}`;
+    }
+
+    form.addEventListener("submit", (event) => event.preventDefault());
+    for (const type of ["input", "focusout", "invalid"]) {
+      form.addEventListener(type, () => setTimeout(show), true);
+    }
+    show();
+  </script>
+</body>
+</html>

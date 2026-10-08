@@ -1,0 +1,33 @@
+<!-- fig02_07.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Etiquetas y grupos</title>
+</head>
+<body>
+  <main>
+    <h1>Etiquetas y grupos</h1>
+
+    <p>
+      <label for="search">Buscar servicio</label>
+      <input type="search" id="search" name="search">
+    </p>
+
+    <p>
+      <label>
+        Nombre del servicio
+        <input type="text" name="name">
+      </label>
+    </p>
+
+    <fieldset>
+      <legend>Mostrar</legend>
+      <label><input type="radio" name="filter" value="all" checked> Todos</label>
+      <label><input type="radio" name="filter" value="available"> Disponibles</label>
+      <label><input type="radio" name="filter" value="down"> Caídos</label>
+    </fieldset>
+  </main>
+</body>
+</html>

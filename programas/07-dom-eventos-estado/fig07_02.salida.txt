@@ -1,0 +1,4 @@
+Servicios
+Catálogo: 120 ms
+Pagos: 480 ms
+Inventario: sin respuesta

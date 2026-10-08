@@ -1,0 +1,35 @@
+<!-- fig07_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.1 — Leer y escribir el documento</title>
+</head>
+<body>
+  <main>
+    <h1 id="title">Servicios</h1>
+    <table>
+      <tbody>
+        <tr><td>Catálogo</td><td>Disponible</td></tr>
+        <tr><td>Pagos</td><td>Disponible</td></tr>
+        <tr><td>Inventario</td><td>Caído</td></tr>
+      </tbody>
+    </table>
+    <p id="count"></p>
+  </main>
+
+  <script type="module">
+    // Leer: ¿cuántas filas hay en el documento?
+    const rows = document.querySelectorAll("tr");
+
+    // Escribir: poner esa cuenta en el párrafo.
+    const paragraph = document.querySelector("#count");
+    paragraph.textContent = `El documento tiene ${rows.length} filas.`;
+
+    // Escribir otra vez: cambiar el texto del título.
+    document.querySelector("#title").textContent = "Servicios (leídos por JavaScript)";
+  </script>
+</body>
+</html>

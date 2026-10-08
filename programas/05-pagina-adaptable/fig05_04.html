@@ -1,0 +1,59 @@
+<!-- fig05_04.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabla que se desplaza sola</title>
+  <link rel="stylesheet" href="fig05_01/styles.css">
+  <style>
+    .table-scroll {
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Servicios</h1>
+    <div class="table-scroll" role="region" aria-labelledby="table-caption" tabindex="0">
+      <table>
+        <caption id="table-caption">Estado de los servicios en la última revisión</caption>
+        <thead>
+          <tr>
+            <th scope="col">Servicio</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Tiempo de respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Catálogo</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>120 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Pagos</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>480 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Inventario</th>
+            <td><span class="status status-down">Caído</span></td>
+            <td>sin respuesta</td>
+          </tr>
+          <tr>
+            <th scope="row">Notificaciones</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>310 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Búsqueda</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>950 ms</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

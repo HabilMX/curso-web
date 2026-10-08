@@ -1,0 +1,3 @@
+Cajas
+Caja con content-box (lo normal sin reglas)
+Caja con border-box

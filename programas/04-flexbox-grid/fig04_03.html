@@ -1,0 +1,60 @@
+<!-- fig04_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El mínimo de un elemento flex</title>
+  <link rel="stylesheet" href="fig04_01/styles.css">
+  <style>
+    .service {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      border: 2px dashed var(--color-border);
+    }
+
+    .service-name {
+      flex: 1 1 auto;
+    }
+
+    .service-name h2,
+    .service-name p {
+      margin: 0;
+    }
+
+    .address {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: var(--color-muted);
+    }
+
+    .can-shrink {
+      min-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>El mínimo de un elemento flex</h1>
+
+    <div class="service" id="one">
+      <div class="service-name">
+        <h2>Inventario</h2>
+        <p class="address">https://inventario.example.com/salud/v2/estado-completo</p>
+      </div>
+      <span class="status status-down">Caído</span>
+    </div>
+
+    <div class="service" id="two">
+      <div class="service-name can-shrink">
+        <h2>Inventario</h2>
+        <p class="address">https://inventario.example.com/salud/v2/estado-completo</p>
+      </div>
+      <span class="status status-down">Caído</span>
+    </div>
+  </main>
+</body>
+</html>

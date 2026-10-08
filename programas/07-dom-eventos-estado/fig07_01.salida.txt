@@ -1,0 +1,6 @@
+Servicios (leídos por JavaScript)
+Catálogo	Disponible
+Pagos	Disponible
+Inventario	Caído
+
+El documento tiene 3 filas.

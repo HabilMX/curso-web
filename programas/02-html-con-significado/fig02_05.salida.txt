@@ -1,0 +1,6 @@
+Servicios
+Estado de los servicios en la última revisión
+Servicio	Estado	Tiempo de respuesta
+Catálogo	Disponible	120 ms
+Pagos	Disponible	480 ms
+Inventario	Caído	sin respuesta

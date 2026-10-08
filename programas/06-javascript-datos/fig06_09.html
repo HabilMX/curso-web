@@ -1,0 +1,27 @@
+<!-- fig06_09.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leer algo que no existe</title>
+</head>
+<body>
+  <main>
+    <h1>Leer algo que no existe</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    const services = [
+      { id: "catalog", name: "Catálogo", status: "available", responseMs: 120 },
+      { id: "payments", name: "Pagos", status: "available", responseMs: 480 },
+      { id: "inventory", name: "Inventario", status: "down", responseMs: null },
+      { id: "notifications", name: "Notificaciones", status: "available", responseMs: 310 },
+      { id: "search", name: "Búsqueda", status: "available", responseMs: 950 },
+    ];
+
+    const sixth = services[5];
+    console.log(sixth.name);
+  </script>
+</body>
+</html>

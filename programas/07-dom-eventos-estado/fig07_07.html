@@ -1,0 +1,19 @@
+<!-- fig07_07.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.7 — El script corre antes que el documento (ERROR A PROPÓSITO)</title>
+  <!-- Un script CLÁSICO en el <head>, sin defer: se ejecuta en cuanto el navegador lo lee. -->
+  <script>
+    document.querySelector("#message").textContent = "Hola";
+  </script>
+</head>
+<body>
+  <main>
+    <p id="message">Esperando…</p>
+  </main>
+</body>
+</html>

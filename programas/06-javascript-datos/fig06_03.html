@@ -1,0 +1,42 @@
+<!-- fig06_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Una lista de servicios</title>
+</head>
+<body>
+  <main>
+    <h1>Una lista de servicios</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    const services = [
+      { id: "catalog", name: "Catálogo", status: "available", responseMs: 120 },
+      { id: "payments", name: "Pagos", status: "available", responseMs: 480 },
+      { id: "inventory", name: "Inventario", status: "down", responseMs: null },
+      { id: "notifications", name: "Notificaciones", status: "available", responseMs: 310 },
+      { id: "search", name: "Búsqueda", status: "available", responseMs: 950 },
+    ];
+
+    console.log(services.length, services[0].name, services.at(-1).name);
+
+    const available = services.filter((service) => service.status === "available");
+    console.log(available.length);
+
+    const names = services.map((service) => service.name);
+    console.log(names.join(", "));
+
+    const payments = services.find((service) => service.id === "payments");
+    console.log(payments.responseMs);
+
+    console.log(services.some((service) => service.status === "down"));
+    console.log(services.every((service) => service.status === "down"));
+
+    const slowestFirst = available.toSorted((a, b) => b.responseMs - a.responseMs);
+    console.log(slowestFirst.map((service) => service.name).join(" > "));
+    console.log(available[0].name);
+  </script>
+</body>
+</html>

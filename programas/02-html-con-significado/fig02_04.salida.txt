@@ -1,0 +1,19 @@
+Resumen
+
+Última revisión: 7 de octubre de 2026, 10:30
+
+Como lista de datos con nombre
+Servicios revisados
+5
+Disponibles
+4 de 5
+Caídos
+1
+Como lista simple
+Catálogo
+Pagos
+Inventario
+Como lista con orden
+Búsqueda: 950 ms
+Pagos: 480 ms
+Notificaciones: 310 ms

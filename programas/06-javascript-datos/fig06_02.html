@@ -1,0 +1,44 @@
+<!-- fig06_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Un servicio como objeto</title>
+</head>
+<body>
+  <main>
+    <h1>Un servicio como objeto</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    const service = {
+      id: "catalog",
+      name: "Catálogo",
+      status: "available",
+      responseMs: 120,
+      url: "https://catalogo.example/salud",
+    };
+
+    console.log(service.name);
+    console.log(service["status"]);
+
+    service.responseMs = 135;
+    console.log(service.responseMs);
+
+    console.log(service.owner);
+    console.log(service.owner?.team);
+    console.log(service.owner?.team ?? "sin responsable");
+
+    const { name, responseMs } = service;
+    console.log(name, responseMs);
+
+    const copy = { ...service, status: "down", responseMs: null };
+    console.log(service.status, copy.status);
+
+    const text = JSON.stringify(service);
+    console.log(text);
+    console.log(JSON.parse(text).name);
+  </script>
+</body>
+</html>

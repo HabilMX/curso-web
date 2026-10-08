@@ -1,0 +1,6 @@
+string number boolean
+Catálogo respondió en 150 ms
+object undefined
+false true
+0.30000000000000004 false
+NaN true

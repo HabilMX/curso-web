@@ -1,0 +1,7 @@
+[
+  { "id": "catalog", "name": "Catálogo", "status": "available", "responseMs": 120 },
+  { "id": "payments", "name": "Pagos", "status": "available", "responseMs": 480 },
+  { "id": "inventory", "name": "Inventario", "status": "down", "responseMs": null },
+  { "id": "notifications", "name": "Notificaciones", "status": "available", "responseMs": 310 },
+  { "id": "search", "name": "Búsqueda", "status": "available", "responseMs": 950 }
+]

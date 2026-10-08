@@ -1,0 +1,4 @@
+Fig. 9.2 — varias peticiones a la vez con allSettled
+panel/data/services.json: bien, 5 elementos
+missing.json: falló, código 404
+panel/data/services-empty.json: bien, 0 elementos

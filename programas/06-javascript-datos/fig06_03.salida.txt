@@ -1,0 +1,8 @@
+5 Catálogo Búsqueda
+4
+Catálogo, Pagos, Inventario, Notificaciones, Búsqueda
+480
+true
+false
+Búsqueda > Pagos > Notificaciones > Catálogo
+Catálogo

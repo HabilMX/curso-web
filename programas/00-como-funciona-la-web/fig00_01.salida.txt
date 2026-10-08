@@ -1,0 +1,2 @@
+Página de ejemplo
+Este texto viaja del servidor al navegador dentro de una respuesta HTTP.

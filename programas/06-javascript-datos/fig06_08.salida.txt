@@ -1,0 +1,4 @@
+Disponibles: 4
+Caídos: 1
+Respuesta promedio: 465 ms
+{"available":4,"down":1,"averageMs":465}

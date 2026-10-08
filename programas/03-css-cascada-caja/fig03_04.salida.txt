@@ -1,0 +1,3 @@
+Herencia
+Este párrafo hereda el color y la cursiva, pero no el borde.
+Un campo:

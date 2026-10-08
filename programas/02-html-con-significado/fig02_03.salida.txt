@@ -1,0 +1,7 @@
+Revisor de servicios
+Ir a: Resumen o Servicios
+Resumen
+4 de 5 servicios disponibles.
+Servicios
+Catálogo, Pagos, Inventario, Notificaciones y Búsqueda.
+Datos de ejemplo escritos a mano.

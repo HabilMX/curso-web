@@ -1,0 +1,41 @@
+<!-- panel/state-test.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Prueba del estado (sin dibujar nada del panel)</title>
+</head>
+<body>
+  <main>
+    <h1>Prueba del estado</h1>
+    <pre id="output"></pre>
+  </main>
+  <script type="module">
+    import { services } from "./js/services.js";
+    import { createState, toggleSort, select, visible } from "./js/state.js";
+
+    const lines = [];
+    function check(description, condition) {
+      lines.push(`${condition ? "ok    " : "FALLA "} ${description}`);
+    }
+    const names = (list) => list.map((service) => service.name).join(", ");
+
+    const state = createState(services);
+    check("al inicio se ve el orden original", names(visible(state)) === "Catálogo, Pagos, Inventario, Notificaciones, Búsqueda");
+
+    toggleSort(state);
+    check("ordenado: del más rápido al más lento", names(visible(state)) === "Catálogo, Notificaciones, Pagos, Búsqueda, Inventario");
+    check("ordenado: el que no tiene medida va al final (Inventario)", visible(state).at(-1).name === "Inventario");
+    check("ordenar no cambia el arreglo original", names(state.services) === "Catálogo, Pagos, Inventario, Notificaciones, Búsqueda");
+
+    select(state, "payments");
+    check("seleccionar guarda el id", state.selected === "payments");
+    select(state, "payments");
+    check("seleccionar el mismo otra vez lo deselecciona", state.selected === null);
+
+    document.querySelector("#output").textContent = lines.join("\n");
+  </script>
+</body>
+</html>

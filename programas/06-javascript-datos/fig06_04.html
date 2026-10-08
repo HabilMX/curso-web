@@ -1,0 +1,63 @@
+<!-- fig06_04.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Decidir y repetir</title>
+</head>
+<body>
+  <main>
+    <h1>Decidir y repetir</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    const services = [
+      { id: "catalog", name: "Catálogo", status: "available", responseMs: 120 },
+      { id: "payments", name: "Pagos", status: "available", responseMs: 480 },
+      { id: "inventory", name: "Inventario", status: "down", responseMs: null },
+      { id: "notifications", name: "Notificaciones", status: "available", responseMs: 310 },
+      { id: "search", name: "Búsqueda", status: "available", responseMs: 950 },
+    ];
+
+    // if / else: una decisión con dos caminos.
+    const first = services[0];
+    if (first.status === "available") {
+      console.log(`${first.name} está disponible.`);
+    } else {
+      console.log(`${first.name} está caído.`);
+    }
+
+    // else if: más de dos caminos; se toma el primero cuya condición se cumpla.
+    const payments = services[1];
+    if (payments.responseMs === null) {
+      console.log(`${payments.name} no respondió.`);
+    } else if (payments.responseMs > 500) {
+      console.log(`${payments.name} respondió lento.`);
+    } else {
+      console.log(`${payments.name} respondió a tiempo.`);
+    }
+
+    // ! invierte un booleano.
+    const allUp = services.every((service) => service.status === "available");
+    console.log(allUp, !allUp);
+
+    // El operador ternario: una decisión que produce un valor.
+    const inventory = services[2];
+    const time = inventory.responseMs === null ? "sin respuesta" : `${inventory.responseMs} ms`;
+    console.log(`${inventory.name}: ${time}`);
+
+    // for...of: las mismas instrucciones para cada elemento, uno tras otro.
+    let total = 0;
+    for (const service of services) {
+      if (service.responseMs === null) {
+        console.log(`${service.name}: sin respuesta, no se suma`);
+        continue;
+      }
+      total += service.responseMs;
+      console.log(`${service.name}: ${service.responseMs} ms, van ${total}`);
+    }
+    console.log(`Total: ${total} ms`);
+  </script>
+</body>
+</html>

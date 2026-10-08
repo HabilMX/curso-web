@@ -1,0 +1,33 @@
+Revisor de servicios
+
+Última revisión: 7 de octubre de 2026, 10:30
+
+Ir a: Resumen o Servicios
+
+Resumen
+Servicios revisados
+5
+Disponibles
+4 de 5
+Caídos
+1
+Respuesta promedio
+465 ms
+Servicios
+
+Buscar servicio
+
+Mostrar
+ Todos  Disponibles  Caídos
+
+Revisar ahora
+
+Estado de los servicios en la última revisión
+Servicio	Estado	Tiempo de respuesta
+Catálogo	Disponible	120 ms
+Pagos	Disponible	480 ms
+Inventario	Caído	sin respuesta
+Notificaciones	Disponible	310 ms
+Búsqueda	Disponible	950 ms
+
+Datos de ejemplo escritos a mano.

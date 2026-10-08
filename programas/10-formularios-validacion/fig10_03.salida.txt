@@ -1,0 +1,8 @@
+:invalid contra :user-invalid
+Con :invalid (rojo desde que abres la página)
+Con :user-invalid (rojo cuando la persona ya intervino)
+Enviar
+Lo que el navegador sabe
+valueMissing: true
+:invalid: true
+:user-invalid: false

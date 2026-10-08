@@ -1,0 +1,28 @@
+<!-- fig09_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 9.3 — pedir datos a otro origen</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 9.3 — pedir datos a otro origen</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+    output.textContent = `esta página vive en: ${location.origin}\nvoy a pedir a:        http://127.0.0.1:8001`;
+
+    try {
+      const response = await fetch("http://127.0.0.1:8001/data/services.json");
+      output.textContent += `\nllegó con el código ${response.status}`;
+    } catch (error) {
+      output.textContent += `\nfetch falló: ${error.name}: ${error.message}`;
+    }
+  </script>
+</body>
+</html>

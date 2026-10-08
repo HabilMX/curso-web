@@ -1,0 +1,106 @@
+<!-- fig04_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revisor de servicios</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="fig04_01/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Revisor de servicios</h1>
+    <p>Última revisión:
+      <time datetime="2026-10-07T10:30:00-06:00">7 de octubre de 2026, 10:30</time>
+    </p>
+    <nav>
+      <p>Ir a: <a href="#summary">Resumen</a> o <a href="#services">Servicios</a></p>
+    </nav>
+  </header>
+
+  <main>
+    <section id="summary">
+      <h2>Resumen</h2>
+      <dl>
+        <div>
+          <dt>Servicios revisados</dt>
+          <dd>5</dd>
+        </div>
+        <div>
+          <dt>Disponibles</dt>
+          <dd>4 de 5</dd>
+        </div>
+        <div>
+          <dt>Caídos</dt>
+          <dd>1</dd>
+        </div>
+        <div>
+          <dt>Respuesta promedio</dt>
+          <dd>465 ms</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="services">
+      <h2>Servicios</h2>
+
+      <p>
+        <label for="search">Buscar servicio</label>
+        <input type="search" id="search" name="search">
+      </p>
+
+      <fieldset>
+        <legend>Mostrar</legend>
+        <label><input type="radio" name="filter" value="all" checked> Todos</label>
+        <label><input type="radio" name="filter" value="available"> Disponibles</label>
+        <label><input type="radio" name="filter" value="down"> Caídos</label>
+      </fieldset>
+
+      <p><button type="button">Revisar ahora</button></p>
+
+      <table>
+        <caption>Estado de los servicios en la última revisión</caption>
+        <thead>
+          <tr>
+            <th scope="col">Servicio</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Tiempo de respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Catálogo</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>120 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Pagos</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>480 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Inventario</th>
+            <td><span class="status status-down">Caído</span></td>
+            <td>sin respuesta</td>
+          </tr>
+          <tr>
+            <th scope="row">Notificaciones</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>310 ms</td>
+          </tr>
+          <tr>
+            <th scope="row">Búsqueda</th>
+            <td><span class="status status-available">Disponible</span></td>
+            <td>950 ms</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Datos de ejemplo escritos a mano.</p>
+  </footer>
+</body>
+</html>

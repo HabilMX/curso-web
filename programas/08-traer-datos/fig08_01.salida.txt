@@ -1,0 +1,6 @@
+Fig. 8.1 — fetch en dos pasos
+estado HTTP: 200
+ok: true
+tipo de contenido: application/json
+servicios recibidos: 5
+el primero: Catálogo

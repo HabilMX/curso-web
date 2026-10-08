@@ -1,0 +1,7 @@
+Prueba del estado
+ok     al inicio se ve el orden original
+ok     ordenado: del más rápido al más lento
+ok     ordenado: el que no tiene medida va al final (Inventario)
+ok     ordenar no cambia el arreglo original
+ok     seleccionar guarda el id
+ok     seleccionar el mismo otra vez lo deselecciona

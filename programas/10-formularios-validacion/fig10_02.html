@@ -1,0 +1,67 @@
+<!-- fig10_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las banderas de validity</title>
+  <link rel="icon" href="data:,">
+  <style>
+    input { font: inherit; padding: 0.5rem; }
+    pre { background: #f4f6f8; padding: 0.75rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Las banderas de validity</h1>
+
+    <p>
+      <label for="time">Tiempo de respuesta (ms)</label><br>
+      <input id="time" type="number" required min="0" max="60000" step="100">
+    </p>
+    <p>
+      <label for="name">Nombre (no puede ser «admin»)</label><br>
+      <input id="name" type="text" required minlength="3">
+    </p>
+
+    <h2>Banderas activas</h2>
+    <pre id="report" role="status"></pre>
+  </main>
+
+  <script type="module">
+    const time = document.getElementById("time");
+    const name = document.getElementById("name");
+    const report = document.getElementById("report");
+
+    function activeFlags(control) {
+      const flags = [];
+      for (const flag in control.validity) {
+        if (control.validity[flag] === true && flag !== "valid") {
+          flags.push(flag);
+        }
+      }
+      return flags.length === 0 ? "ninguna (valid: true)" : flags.join(", ");
+    }
+
+    function validateName() {
+      // Sin la rama que limpia, el campo se quedaría inválido para siempre.
+      name.setCustomValidity(
+        name.value.toLowerCase() === "admin" ? "Ese nombre está reservado." : "",
+      );
+    }
+
+    function show() {
+      report.textContent =
+        `tiempo -> ${activeFlags(time)}\n` + `nombre -> ${activeFlags(name)}`;
+    }
+
+    for (const control of [time, name]) {
+      control.addEventListener("input", () => {
+        validateName();
+        show();
+      });
+    }
+    show();
+  </script>
+</body>
+</html>

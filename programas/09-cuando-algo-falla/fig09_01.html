@@ -1,0 +1,29 @@
+<!-- fig09_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 9.1 — el tiempo límite</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 9.1 — el tiempo límite</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+
+    try {
+      // Un límite de 1 segundo para una respuesta que slow-server.py demora 3 (?delay=3000).
+      // Con el servidor de siempre, ?delay se ignora y la respuesta llega a tiempo.
+      await fetch("panel/data/services.json?delay=3000", { signal: AbortSignal.timeout(1000) });
+      output.textContent = "alcanzó a responder: el límite no se cumplió";
+    } catch (error) {
+      output.textContent = `nombre del error: ${error.name}\nmensaje: ${error.message}`;
+    }
+  </script>
+</body>
+</html>

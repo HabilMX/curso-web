@@ -1,0 +1,46 @@
+<!-- fig07_06.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.6 — Un solo oyente para muchos botones</title>
+  <style>
+    /* Un blanco cómodo para el dedo o el mouse: WCAG 2.2 pide al menos 24 × 24 px; aquí mide 44. */
+    button { min-height: 2.75rem; padding: 0.5rem 0.75rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Delegación de eventos</h1>
+    <ul id="list"></ul>
+    <p id="result" role="status">Ningún botón presionado.</p>
+  </main>
+
+  <script type="module">
+    const names = ["Catálogo", "Pagos", "Inventario"];
+    const list = document.querySelector("#list");
+    const result = document.querySelector("#result");
+
+    for (const name of names) {
+      const item = document.createElement("li");
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.name = name;                     // guarda el nombre en data-name
+      const icon = document.createElement("span");    // un elemento DENTRO del botón
+      icon.textContent = "▶ ";
+      button.append(icon, `Ver ${name}`);
+      item.append(button);
+      list.append(item);
+    }
+
+    // UN solo oyente, en el contenedor. Los clics de todos los botones suben hasta aquí.
+    list.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-name]");
+      if (button === null) return;                    // el clic no fue en un botón
+      result.textContent = `Presionaste: ${button.dataset.name} (target: <${event.target.localName}>)`;
+    });
+  </script>
+</body>
+</html>

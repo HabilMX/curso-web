@@ -1,0 +1,6 @@
+Lista visible:
+• Catálogo
+• Pagos
+• 
+
+Título de la pestaña (lo cambió el dato): Se ejecutó código que venía en un dato

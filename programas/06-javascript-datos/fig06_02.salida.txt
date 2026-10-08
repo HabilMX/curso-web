@@ -1,0 +1,10 @@
+Catálogo
+available
+135
+undefined
+undefined
+sin responsable
+Catálogo 135
+available down
+{"id":"catalog","name":"Catálogo","status":"available","responseMs":135,"url":"https://catalogo.example/salud"}
+Catálogo

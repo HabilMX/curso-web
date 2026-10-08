@@ -1,0 +1,40 @@
+<!-- fig08_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 8.3 — async y await, con la revisión de ok</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 8.3 — async y await, con la revisión de ok</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+
+    async function requestServices(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`El servidor respondió con el código ${response.status}.`);
+      }
+      return await response.json();
+    }
+
+    async function tryUrl(url) {
+      try {
+        const services = await requestServices(url);
+        return `${url}: llegaron ${services.length} servicios`;
+      } catch (error) {
+        return `${url}: falló — ${error.message}`;
+      }
+    }
+
+    const results = [await tryUrl("panel/data/services.json"), await tryUrl("missing.json")];
+    output.textContent = results.join("\n");
+  </script>
+</body>
+</html>

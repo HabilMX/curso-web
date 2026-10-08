@@ -1,0 +1,5 @@
+No hay mensaje en la consola. Medido con Chrome 154 en un teléfono emulado de 390 px de ancho:
+  con  <meta name="viewport" content="width=device-width, initial-scale=1">  ->  window.innerWidth = 390
+  sin la etiqueta (esta página)                                              ->  window.innerWidth = 980
+Chrome dibuja la página en una ventana virtual de 980 px (otro navegador puede usar otra cifra) y la encoge
+para que quepa, de modo que todo se ve diminuto.

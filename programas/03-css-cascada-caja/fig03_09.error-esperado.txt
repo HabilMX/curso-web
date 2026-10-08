@@ -1,0 +1,12 @@
+Line : 3 h1
+       Property “colour” doesn't exist. The closest matching property name is “color” : 
+       navy
+Line : 6 p
+       (Value Error : color (nullcolors.html#propdef-color))
+       “#12” is not a valid color 3 or 6 hexadecimals numbers : 
+Line : 9 table
+       (Value Error : width (nullvisudet.html#propdef-width))
+       Too many values or values are not recognized : 
+Line : 13 .status
+       (Value Error : padding (nullbox.html#propdef-padding))
+       Missing a semicolon before the property name “border-radius”

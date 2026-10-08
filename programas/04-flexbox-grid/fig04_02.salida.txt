@@ -1,0 +1,9 @@
+Los dos ejes
+flex-direction: row (el eje principal es horizontal)
+Uno
+Dos
+Tres
+flex-direction: column (el eje principal es vertical)
+Uno
+Dos
+Tres

@@ -1,0 +1,95 @@
+<!-- panel/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revisor de servicios</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Revisor de servicios</h1>
+    <p>Última revisión: <span id="checked-at">todavía no</span></p>
+    <nav>
+      <p>Ir a: <a href="#summary">Resumen</a> o <a href="#services">Servicios</a></p>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section id="summary">
+      <h2>Resumen</h2>
+      <dl class="summary">
+        <div>
+          <dt>Servicios revisados</dt>
+          <dd id="summary-total"></dd>
+        </div>
+        <div>
+          <dt>Disponibles</dt>
+          <dd id="summary-available"></dd>
+        </div>
+        <div>
+          <dt>Caídos</dt>
+          <dd id="summary-down"></dd>
+        </div>
+        <div>
+          <dt>Respuesta promedio</dt>
+          <dd id="summary-average"></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="services">
+      <h2>Servicios</h2>
+
+      <!-- Las dos zonas de aviso existen desde el principio: así los lectores de pantalla
+           las vigilan antes de que aparezca el primer mensaje. -->
+      <p id="notice" class="notice" role="status">Cargando servicios…</p>
+      <p id="error-notice" class="notice notice-error" role="alert"></p>
+      <button type="button" id="retry" hidden>Reintentar</button>
+
+      <div id="data-zone" hidden>
+        <div class="controls">
+          <p class="field">
+            <label for="search">Buscar servicio</label>
+            <input type="search" id="search" name="search">
+          </p>
+
+          <fieldset>
+            <legend>Mostrar</legend>
+            <label><input type="radio" name="filter" value="all" checked> Todos</label>
+            <label><input type="radio" name="filter" value="available"> Disponibles</label>
+            <label><input type="radio" name="filter" value="down"> Caídos</label>
+          </fieldset>
+
+          <p><button type="button" id="check-now">Revisar ahora</button></p>
+          <p><button type="button" id="sort" aria-pressed="false">Ordenar por tiempo de respuesta</button></p>
+        </div>
+
+        <div class="table-scroll" role="region" aria-labelledby="table-caption" tabindex="0">
+          <table>
+            <caption id="table-caption">Estado de los servicios en la última revisión</caption>
+            <thead>
+              <tr>
+                <th scope="col">Servicio</th>
+                <th scope="col">Estado</th>
+                <th scope="col" class="number">Tiempo de respuesta</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="services-body"></tbody>
+          </table>
+        </div>
+
+        <p id="detail" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Datos de ejemplo del archivo data/services.json.</p>
+  </footer>
+</body>
+</html>

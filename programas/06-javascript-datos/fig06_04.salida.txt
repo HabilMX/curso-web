@@ -1,0 +1,10 @@
+Catálogo está disponible.
+Pagos respondió a tiempo.
+false true
+Inventario: sin respuesta
+Catálogo: 120 ms, van 120
+Pagos: 480 ms, van 600
+Inventario: sin respuesta, no se suma
+Notificaciones: 310 ms, van 910
+Búsqueda: 950 ms, van 1860
+Total: 1860 ms

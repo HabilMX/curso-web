@@ -1,0 +1,4 @@
+Fig. 8.2 — un 404 no rechaza la promesa
+la promesa SE CUMPLIÓ (no se rechazó)
+estado HTTP: 404
+ok: false

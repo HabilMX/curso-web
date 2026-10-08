@@ -1,0 +1,56 @@
+<!-- panel/filters-test.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Prueba de los filtros (sin dibujar nada del panel)</title>
+</head>
+<body>
+  <h1>Prueba de los filtros</h1>
+  <pre id="output"></pre>
+  <script type="module">
+    import { normalize, filterServices } from "./js/filters.js";
+    import { createState, loadSucceeded, changeFilter, nameExists, addService, toggleSort, visible } from "./js/state.js";
+
+    const services = [
+      { id: "catalog", name: "Catálogo", status: "available", responseMs: 120 },
+      { id: "payments", name: "Pagos", status: "available", responseMs: 480 },
+      { id: "inventory", name: "Inventario", status: "down", responseMs: null },
+      { id: "notifications", name: "Notificaciones", status: "available", responseMs: 310 },
+      { id: "search", name: "Búsqueda", status: "available", responseMs: 950 },
+    ];
+
+    const lines = [];
+    function check(description, condition) {
+      lines.push(`${condition ? "ok    " : "FALLA "} ${description}`);
+    }
+    const names = (list) => list.map((service) => service.name).join(", ");
+    const all = (text) => ({ text, status: "all" });
+
+    check("normalize quita acentos y mayúsculas", normalize("  CATÁLOGO ") === "catalogo");
+    check("sin filtro pasan todos", filterServices(services, all("")).length === 5);
+    check("«catalo» encuentra Catálogo", names(filterServices(services, all("catalo"))) === "Catálogo");
+    check("«BUSQUEDA» encuentra Búsqueda: ni la «ú» ni las mayúsculas importan", names(filterServices(services, all("BUSQUEDA"))) === "Búsqueda");
+    check("el estado «down» deja solo Inventario", names(filterServices(services, { text: "", status: "down" })) === "Inventario");
+    check("texto y estado se combinan: «o» y «available» deja tres", names(filterServices(services, { text: "o", status: "available" })) === "Catálogo, Pagos, Notificaciones");
+    check("filtrar no cambia el arreglo original", services.length === 5);
+
+    const state = createState();
+    loadSucceeded(state, services, new Date());
+    check("nameExists ignora mayúsculas y acentos", nameExists(state, "catalogo") === true);
+    check("nameExists dice que no a un nombre nuevo", nameExists(state, "Facturas") === false);
+
+    changeFilter(state, { status: "down" });
+    addService(state, { id: "billing", name: "Facturas", status: "available", responseMs: 230 });
+    check("un servicio nuevo que no cumple el filtro se agrega pero no se ve", state.services.length === 6 && names(visible(state)) === "Inventario");
+
+    changeFilter(state, { text: "o", status: "all" });
+    toggleSort(state);
+    check("el orden se aplica después del filtro: con «o», del más rápido al más lento", names(visible(state)) === "Catálogo, Notificaciones, Pagos, Inventario");
+
+    document.querySelector("#output").textContent = lines.join("\n");
+  </script>
+</body>
+</html>

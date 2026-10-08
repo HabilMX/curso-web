@@ -1,0 +1,54 @@
+<!-- fig04_04.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barra de controles con Flexbox</title>
+  <link rel="stylesheet" href="fig04_01/styles.css">
+  <style>
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .controls p,
+    .controls fieldset {
+      margin: 0;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 1 1 14rem;
+    }
+
+    .field input {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Barra de controles</h1>
+    <div class="controls">
+      <p class="field">
+        <label for="search">Buscar servicio</label>
+        <input type="search" id="search" name="search">
+      </p>
+
+      <fieldset>
+        <legend>Mostrar</legend>
+        <label><input type="radio" name="filter" value="all" checked> Todos</label>
+        <label><input type="radio" name="filter" value="available"> Disponibles</label>
+        <label><input type="radio" name="filter" value="down"> Caídos</label>
+      </fieldset>
+
+      <p><button type="button">Revisar ahora</button></p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,322 @@
+/* panel/css/styles.css */
+/* La hoja del panel en la Lección 8: la misma de la Lección 7, sin cambios. Esta lección
+   no cambia el aspecto del panel; cambia de dónde salen sus datos. */
+
+/* El orden de las capas se declara una sola vez, arriba. La última gana. */
+@layer reset, base, components;
+
+@layer reset {
+  /* La caja: el ancho que escribes es el ancho que se ve. */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* El navegador no hace que los campos hereden la letra del texto. */
+  input,
+  button {
+    font: inherit;
+  }
+}
+
+@layer base {
+  /* Las decisiones del panel viven aquí, con nombres que dicen para qué sirven. */
+  :root {
+    --color-text: #1b1f24;
+    --color-muted: #57606a;
+    --color-page: #f6f8fa;
+    --color-surface: #ffffff;
+    --color-border: #d0d7de;
+    --color-control: #6e7781;
+    --color-accent: #0b5cad;
+
+    --color-available-text: #0f5132;
+    --color-available-bg: #d1e7dd;
+    --color-down-text: #842029;
+    --color-down-bg: #f8d7da;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2.5rem;
+
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --line-height: 1.6;
+    --radius: 0.375rem;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-page);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+  }
+
+  /* Un ancho cómodo para leer, centrado: auto reparte el espacio sobrante.
+     Lección 5: de 60 a 80 rem, porque en una pantalla ancha ahora caben dos columnas. */
+  header,
+  main,
+  footer {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: var(--space-3);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-2);
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    margin: 0 0 var(--space-3);
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+
+  /* Que el foco del teclado se vea siempre: nunca outline: none sin reemplazo. */
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  footer {
+    color: var(--color-muted);
+  }
+}
+
+@layer components {
+  /* Cada sección es una hoja blanca sobre el fondo de la página.
+     Lección 5: sin margen inferior; la separación la pone el gap de .layout. */
+  section {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  /* El resumen: cada par nombre-valor en su renglón. */
+  dl div {
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  dl div:last-child {
+    border-bottom: 0;
+  }
+
+  dt {
+    color: var(--color-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  /* Los controles. */
+  label {
+    margin-right: var(--space-3);
+  }
+
+  input[type="search"] {
+    min-height: 2.5rem;
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-control);
+    border-radius: var(--radius);
+  }
+
+  fieldset {
+    margin: var(--space-3) 0;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  button {
+    min-height: 2.5rem;
+    padding: var(--space-1) var(--space-3);
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: var(--color-text);
+  }
+
+  /* La tabla. */
+  table {
+    width: 100%;
+    margin-top: var(--space-3);
+    border-collapse: collapse;
+  }
+
+  caption {
+    padding-bottom: var(--space-2);
+    color: var(--color-muted);
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  /* Los números a la derecha y con cifras del mismo ancho para que alineen.
+     Lección 7: la columna de tiempos lleva nombre; con una cuarta columna, ya no es la última. */
+  .number {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* La insignia de estado: una sola regla, y las variantes solo cambian variables. */
+  .status {
+    display: inline-block;
+    padding: 0 var(--space-2);
+    border-radius: 999px;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .status-available {
+    --badge-bg: var(--color-available-bg);
+    --badge-text: var(--color-available-text);
+  }
+
+  .status-down {
+    --badge-bg: var(--color-down-bg);
+    --badge-text: var(--color-down-text);
+  }
+
+  /* ---- Lecciones 4 y 5: el acomodo ---- */
+
+  /* Las dos piezas de la página: la ventana decide si van una sobre otra
+     o lado a lado. minmax(0, 1fr) y no 1fr: la columna no se infla con la tabla. */
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  @media (width >= 64em) {
+    .layout {
+      grid-template-columns: 20rem minmax(0, 1fr);
+    }
+  }
+
+  /* Grid, dos dimensiones: las cifras del resumen cuentan sus propias columnas. */
+  .summary {
+    container-type: inline-size;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+    gap: 0 var(--space-3);
+    margin: 0;
+  }
+
+  /* La caja, no la ventana, decide si cada cifra va en una fila compacta. */
+  @container (width < 24rem) {
+    .summary div {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+
+    .summary dd {
+      white-space: nowrap;
+    }
+  }
+
+  /* Flexbox, una dimensión: el encabezado y la barra de controles se parten
+     en renglones cuando no caben. */
+  .page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .page-header p {
+    margin: 0;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-3);
+  }
+
+  .controls p,
+  .controls fieldset {
+    margin: 0;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    flex: 1 1 14rem;
+  }
+
+  .field input {
+    width: 100%;
+  }
+
+  /* La tabla conserva su semántica: lo que se desplaza es su envoltorio. */
+  .table-scroll {
+    overflow-x: auto;
+  }
+}
+
+@layer components {
+  /* ---- Lección 7: la tabla que se dibuja desde los datos ---- */
+  :root {
+    --color-selected: #dbe9f8;
+  }
+
+  /* La fila del servicio elegido. */
+  tr.selected {
+    background: var(--color-selected);
+  }
+
+  /* Un botón que está «presionado» (aria-pressed="true") se distingue de los demás. */
+  button[aria-pressed="true"] {
+    background: var(--color-text);
+  }
+
+  /* Fuera de la vista, pero dentro del árbol de accesibilidad: lo lee un lector de pantalla. */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Un elemento con position: absolute se coloca respecto de su ancestro posicionado más
+     cercano. Sin esta regla, el texto oculto de los botones escapa de la caja que se desplaza
+     y ensancha la página entera a 320 px. */
+  .table-scroll {
+    position: relative;
+  }
+}

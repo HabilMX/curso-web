@@ -1,0 +1,4 @@
+1860 372
+1 NaN 51 4
+0
+TypeError: Reduce of empty array with no initial value

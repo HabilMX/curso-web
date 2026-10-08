@@ -1,0 +1,6 @@
+Las banderas de validity
+Tiempo de respuesta (ms)
+Nombre (no puede ser «admin»)
+Banderas activas
+tiempo -> valueMissing
+nombre -> valueMissing

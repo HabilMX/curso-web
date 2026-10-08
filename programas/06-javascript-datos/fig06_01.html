@@ -1,0 +1,33 @@
+<!-- fig06_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valores y variables</title>
+</head>
+<body>
+  <main>
+    <h1>Valores y variables</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    const name = "Catálogo";
+    let responseMs = 120;
+    const isUp = true;
+
+    console.log(typeof name, typeof responseMs, typeof isUp);
+
+    responseMs = responseMs + 30;
+    console.log(`${name} respondió en ${responseMs} ms`);
+
+    const noAnswer = null;
+    let notYet;
+    console.log(typeof noAnswer, typeof notYet);
+
+    console.log(120 === "120", 120 == "120");
+    console.log(0.1 + 0.2, 0.1 + 0.2 === 0.3);
+    console.log(Number("abc"), Number.isNaN(Number("abc")));
+  </script>
+</body>
+</html>

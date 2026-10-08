@@ -1,0 +1,12 @@
+Prueba de los filtros
+ok     normalize quita acentos y mayúsculas
+ok     sin filtro pasan todos
+ok     «catalo» encuentra Catálogo
+ok     «BUSQUEDA» encuentra Búsqueda: ni la «ú» ni las mayúsculas importan
+ok     el estado «down» deja solo Inventario
+ok     texto y estado se combinan: «o» y «available» deja tres
+ok     filtrar no cambia el arreglo original
+ok     nameExists ignora mayúsculas y acentos
+ok     nameExists dice que no a un nombre nuevo
+ok     un servicio nuevo que no cumple el filtro se agrega pero no se ve
+ok     el orden se aplica después del filtro: con «o», del más rápido al más lento

@@ -1,0 +1,5 @@
+¿Quién gana?
+Uno: solo el nombre del elemento.
+Dos: con una clase.
+Tres: con clase e identificador.
+Cuatro: con el atributo style.

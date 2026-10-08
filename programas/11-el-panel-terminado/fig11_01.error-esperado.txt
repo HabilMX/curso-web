@@ -1,0 +1,1 @@
+Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-bTp6bKDsmuoAZZxMFjB9R21R8gPJ7kRwjoDZhQv8XQo='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.

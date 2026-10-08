@@ -1,0 +1,83 @@
+<!-- fig05_05.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dos preguntas distintas: la ventana y la caja</title>
+  <link rel="stylesheet" href="fig05_01/styles.css">
+  <style>
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* La separación la pone el gap de la rejilla, no el margen de la Lección 3. */
+    .layout section {
+      margin-bottom: 0;
+    }
+
+    /* La ventana decide cómo se reparten las dos piezas de la página. */
+    @media (width >= 64em) {
+      .layout {
+        grid-template-columns: 20rem minmax(0, 1fr);
+      }
+    }
+
+    /* La caja decide cómo se acomoda lo que lleva dentro. */
+    .summary {
+      container-type: inline-size;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+      gap: 0 1rem;
+      margin: 0;
+    }
+
+    @container (width < 24rem) {
+      .summary div {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+      }
+
+      .summary dd {
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>La página en dos piezas</h1>
+  <main class="layout">
+    <section id="summary">
+      <h2>Resumen</h2>
+      <dl class="summary">
+        <div>
+          <dt>Servicios revisados</dt>
+          <dd>5</dd>
+        </div>
+        <div>
+          <dt>Disponibles</dt>
+          <dd>4 de 5</dd>
+        </div>
+        <div>
+          <dt>Caídos</dt>
+          <dd>1</dd>
+        </div>
+        <div>
+          <dt>Respuesta promedio</dt>
+          <dd>465 ms</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="services">
+      <h2>Servicios</h2>
+      <p>Aquí va la tabla.</p>
+    </section>
+  </main>
+</body>
+</html>

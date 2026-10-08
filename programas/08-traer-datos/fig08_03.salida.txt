@@ -1,0 +1,3 @@
+Fig. 8.3 — async y await, con la revisión de ok
+panel/data/services.json: llegaron 5 servicios
+missing.json: falló — El servidor respondió con el código 404.

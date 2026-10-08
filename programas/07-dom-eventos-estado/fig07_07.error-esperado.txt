@@ -1,0 +1,7 @@
+Consola de Chrome:
+Uncaught TypeError: Cannot set properties of null (setting 'textContent')
+
+Consola de Firefox:
+TypeError: document.querySelector(...) is null
+
+La página se queda con «Esperando…».

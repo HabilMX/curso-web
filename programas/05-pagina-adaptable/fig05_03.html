@@ -1,0 +1,41 @@
+<!-- fig05_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resumen que cuenta sus columnas</title>
+  <link rel="stylesheet" href="fig05_01/styles.css">
+  <style>
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+      gap: 0 1rem;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Resumen</h1>
+    <dl class="summary">
+      <div>
+        <dt>Servicios revisados</dt>
+        <dd>5</dd>
+      </div>
+      <div>
+        <dt>Disponibles</dt>
+        <dd>4 de 5</dd>
+      </div>
+      <div>
+        <dt>Caídos</dt>
+        <dd>1</dd>
+      </div>
+      <div>
+        <dt>Respuesta promedio</dt>
+        <dd>465 ms</dd>
+      </div>
+    </dl>
+  </main>
+</body>
+</html>

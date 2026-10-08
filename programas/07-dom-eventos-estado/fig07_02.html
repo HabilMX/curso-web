@@ -1,0 +1,34 @@
+<!-- fig07_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.2 — Dibujar una lista desde un arreglo</title>
+</head>
+<body>
+  <main>
+    <h1>Servicios</h1>
+    <ul id="list"></ul>
+  </main>
+
+  <script type="module">
+    const services = [
+      { id: "catalog", name: "Catálogo", status: "available", responseMs: 120 },
+      { id: "payments", name: "Pagos", status: "available", responseMs: 480 },
+      { id: "inventory", name: "Inventario", status: "down", responseMs: null },
+    ];
+
+    const list = document.querySelector("#list");
+
+    for (const service of services) {
+      const item = document.createElement("li");                      // 1. crear el nodo
+      item.textContent = service.responseMs === null                  // 2. su texto
+        ? `${service.name}: sin respuesta`
+        : `${service.name}: ${service.responseMs} ms`;
+      list.append(item);                                              // 3. colgarlo del árbol
+    }
+  </script>
+</body>
+</html>

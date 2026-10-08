@@ -1,0 +1,5 @@
+No hay mensaje en la consola. Los tres botones quedan pegados a la izquierda, uno tras otro,
+y en el panel de estilos de las herramientas del navegador la declaración
+«justify-content: space-between» aparece atenuada, con un icono de aviso que explica que esa
+propiedad no tiene efecto porque el elemento (.controls) no es un contenedor flex ni un
+contenedor grid. La causa: falta «display: flex».

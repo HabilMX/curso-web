@@ -1,0 +1,34 @@
+<!-- fig07_05.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 7.5 — Escuchar un clic</title>
+  <style>
+    /* Un blanco cómodo para el dedo o el mouse: WCAG 2.2 pide al menos 24 × 24 px; aquí mide 44. */
+    button { min-height: 2.75rem; padding: 0.5rem 0.75rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Un botón y un contador</h1>
+    <button type="button" id="counter">Contar un clic</button>
+    <p id="result" role="status">Todavía no hay clics.</p>
+  </main>
+
+  <script type="module">
+    const button = document.querySelector("#counter");
+    const result = document.querySelector("#result");
+    let clicks = 0;
+
+    function onClick(event) {
+      clicks += 1;
+      result.textContent = `Clics: ${clicks}. Tipo de evento: ${event.type}. Lo recibió: <${event.currentTarget.localName}>.`;
+    }
+
+    button.addEventListener("click", onClick);   // pasa la función, NO la llama (sin paréntesis)
+  </script>
+</body>
+</html>

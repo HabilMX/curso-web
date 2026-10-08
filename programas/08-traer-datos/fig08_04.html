@@ -1,0 +1,28 @@
+<!-- fig08_04.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 8.4 — leer como JSON algo que no lo es</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 8.4 — leer como JSON algo que no lo es</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+
+    const response = await fetch("fig08_01.html");   // existe, responde 200... pero es una página
+    output.textContent = `código: ${response.status}, ok: ${response.ok}\ntipo: ${response.headers.get("content-type")}`;
+    try {
+      await response.json();
+    } catch (error) {
+      output.textContent += `\n${error.name}: ${error.message}`;
+    }
+  </script>
+</body>
+</html>

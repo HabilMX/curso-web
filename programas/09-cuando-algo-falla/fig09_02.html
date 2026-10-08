@@ -1,0 +1,35 @@
+<!-- fig09_02.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Fig. 9.2 — varias peticiones a la vez con allSettled</title>
+</head>
+<body>
+  <main>
+    <h1>Fig. 9.2 — varias peticiones a la vez con allSettled</h1>
+    <pre id="output">Cargando…</pre>
+  </main>
+
+  <script type="module">
+    const output = document.querySelector("#output");
+
+    async function request(url) {
+      const response = await fetch(url, { signal: AbortSignal.timeout(3000) });
+      if (!response.ok) throw new Error(`código ${response.status}`);
+      return await response.json();
+    }
+
+    const urls = ["panel/data/services.json", "missing.json", "panel/data/services-empty.json"];
+    const results = await Promise.allSettled(urls.map(request));
+
+    output.textContent = results.map((result, i) =>
+      result.status === "fulfilled"
+        ? `${urls[i]}: bien, ${result.value.length} elementos`
+        : `${urls[i]}: falló, ${result.reason.message}`
+    ).join("\n");
+  </script>
+</body>
+</html>

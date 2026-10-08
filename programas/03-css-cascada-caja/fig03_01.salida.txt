@@ -1,0 +1,2 @@
+Revisor de servicios
+Cada regla tiene un selector, que dice a qué elementos se aplica, y declaraciones entre llaves, que dicen qué cambia en ellos.

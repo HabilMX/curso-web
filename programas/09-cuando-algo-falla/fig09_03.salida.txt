@@ -1,0 +1,4 @@
+Fig. 9.3 — pedir datos a otro origen
+esta página vive en: http://127.0.0.1:8000
+voy a pedir a:        http://127.0.0.1:8001
+fetch falló: TypeError: Failed to fetch

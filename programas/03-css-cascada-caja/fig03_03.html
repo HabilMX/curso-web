@@ -1,0 +1,31 @@
+<!-- fig03_03.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capas</title>
+  <style>
+    @layer base, components, overrides;
+
+    @layer base {
+      a { color: gray; }
+    }
+    @layer components {
+      .link { color: green; }
+    }
+    @layer overrides {
+      a { color: blue; }
+    }
+    .plain { color: purple; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Capas</h1>
+    <p><a href="#uno" class="link">Un enlace con clase, en la capa components</a></p>
+    <p><a href="#dos">Un enlace sin clase</a></p>
+    <p><a href="#tres" class="plain">Un enlace con una regla sin capa</a></p>
+  </main>
+</body>
+</html>

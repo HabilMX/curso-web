@@ -1,0 +1,49 @@
+<!-- fig06_05.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avisar de un error, new y propagación</title>
+</head>
+<body>
+  <main>
+    <h1>Avisar de un error, new y propagación</h1>
+    <p>Abre la consola de las herramientas del navegador (F12) para ver el resultado.</p>
+  </main>
+  <script type="module">
+    // throw: avisar de que algo no tiene sentido y detener lo que se estaba haciendo.
+    function checkResponseMs(value) {
+      if (typeof value !== "number") {
+        throw new Error(`Se esperaba un número y llegó: ${value}`);
+      }
+      return value;
+    }
+
+    // try / catch: intentar algo y, si falla, seguir por otro camino.
+    try {
+      console.log(checkResponseMs(120));
+      console.log(checkResponseMs("rápido"));
+      console.log("Esta línea no se ejecuta.");
+    } catch (error) {
+      console.log(`Se atrapó un ${error.name}: ${error.message}`);
+    }
+    console.log("El programa sigue.");
+
+    // new: crear un objeto nuevo a partir de un constructor.
+    const failure = new Error("Sin conexión");
+    console.log(failure.message);
+    const format = new Intl.NumberFormat("es-MX");
+    console.log(format.format(1860));
+
+    // ...: la propagación, en una llamada, en un arreglo y en un objeto.
+    const times = [120, 480, 310, 950];
+    console.log(Math.max(...times));
+    const withMail = [...times, 210];
+    console.log(withMail.length, times.length);
+    const mail = { id: "mail", name: "Correo", status: "available", responseMs: 210 };
+    const mailDown = { ...mail, status: "down", responseMs: null };
+    console.log(mail.status, mailDown.status, mailDown.name);
+  </script>
+</body>
+</html>

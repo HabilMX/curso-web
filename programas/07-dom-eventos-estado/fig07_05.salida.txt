@@ -1,0 +1,2 @@
+Tras dos clics:
+Clics: 2. Tipo de evento: click. Lo recibió: <button>.

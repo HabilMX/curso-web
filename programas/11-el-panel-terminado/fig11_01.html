@@ -1,0 +1,22 @@
+<!-- fig11_01.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+  <title>Una política que bloquea el script en línea</title>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <main>
+    <h1>Una política que bloquea el script en línea</h1>
+    <p id="result" role="status">Ningún script se ha ejecutado.</p>
+  </main>
+
+  <script>
+    document.getElementById("result").textContent = "El script en línea sí se ejecutó.";
+  </script>
+  <script src="fig11_01/external.js"></script>
+</body>
+</html>
