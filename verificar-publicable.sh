@@ -30,6 +30,20 @@ fi
 export HB_VERIFICADOR_EN_CURSO=$((HB_VERIFICADOR_EN_CURSO + 1))
 LISTA=.publicable-prohibido.txt
 
+# 🔴 UNA SOLA DEFINICION DE «LIGA PUBLICA PERMITIDA», Y VIVE AQUI. Antes el mismo
+# patron estaba escrito CUATRO veces —dos en la autoprueba y dos en el lazo—, asi
+# que la autoprueba podia certificar una regla DISTINTA de la que aplica el
+# verificador: el dia que alguien corrigiera una copia y no las otras, la puerta
+# diria «probado» de algo que no hace. Lo encontro la revision automatica del
+# commit del 7-oct-2026, no yo.
+#
+# 🔴 Y LOS IDIOMAS VAN ENUMERADOS, no como `[a-z]{2}`. Con el comodin la excepcion
+# cubria CUALQUIER par de letras: medido el 7-oct-2026, una liga a `/zz/cursos/x/`
+# salia exenta. Lo autorizado son los cinco idiomas del sitio, y una lista blanca
+# mas ancha que la decision que la creo es un hueco, aunque hoy esa direccion no
+# exista.
+LIGAS_PUBLICAS='https://www\.habil\.mx/(es|en|fr|pt|bg)/(blog|cursos|courses|cours)(/[a-z0-9-]+)*/'
+
 # Se revisa TODO archivo de texto del repositorio, sin importar su extensión ni
 # su carpeta: las lecciones (.md), pero también lo que se copia y se ejecuta
 # (programas/*.ts, .txt, .json), el README de la raíz, la licencia, los guiones
@@ -80,12 +94,12 @@ autoprueba() {
   # sin control positivo es un agujero con buena conciencia.
   #   (a) una liga permitida NO debe delatar
   printf 'ver https://www.%s/es/cursos/typescript/ aqui\n' 'habil''.mx' > "$tmp/es/leccion.md"
-  ( cd "$tmp" && grep -qE 'https://www\.habil\.mx/[a-z]{2}/(blog|cursos|courses|cours)(/[a-z0-9-]+)*/' es/leccion.md ) || rc=1
+  ( cd "$tmp" && grep -qE "$LIGAS_PUBLICAS" es/leccion.md ) || rc=1
   #   (a bis) 🔴 EL CASO QUE SE ESCAPABA: liga permitida Y host interno en la
   #   MISMA linea. Tiene que seguir delatando.
   printf 'ver https://www.%s/es/blog/x/ y tambien cicd.%s/interno\n' 'habil''.mx' 'habil''.mx' > "$tmp/es/leccion.md"
   ( cd "$tmp" && printf '%s\n' "$(grep -rnIE -- '[a-z0-9-]+\.habil\.mx' es/leccion.md)" \
-      | sed -E 's#https://www\.habil\.mx/[a-z]{2}/(blog|cursos|courses|cours)(/[a-z0-9-]+)*/##g' \
+      | sed -E "s#$LIGAS_PUBLICAS##g" \
       | grep -qE -- '[a-z0-9-]+\.habil\.mx' ) || rc=1
   #   (a ter) 🔴 UNA CREDENCIAL CON FORMA DE SLUG dentro de la liga permitida
   #   NO puede quedar exenta: su patron no es el del host y la excepcion no le
@@ -105,7 +119,7 @@ autoprueba() {
   # archivo, el propio verificador se delataria a si mismo. Al original le pasaba
   # lo mismo y por eso excluye la lista de patrones.
   printf 'ver https://cicd.%s/interno aqui\n' 'habil''.mx' > "$tmp/es/leccion.md"
-  ( cd "$tmp" && grep -qE 'https://www\.habil\.mx/[a-z]{2}/(blog|cursos|courses|cours)(/[a-z0-9-]+)*/' es/leccion.md ) && rc=1
+  ( cd "$tmp" && grep -qE "$LIGAS_PUBLICAS" es/leccion.md ) && rc=1
   # y la exclusión: la lista de patrones se excluye, el resto no
   printf '%s\n' "$patron" > "$tmp/$LISTA"
   ( cd "$tmp" && buscar "$patron" . >/dev/null 2>&1 ); [ "$?" -eq 0 ] || rc=1
@@ -176,14 +190,25 @@ while IFS= read -r patron || [ -n "$patron" ]; do
     # el patron en lo que queda. Lo encontro la revision automatica del commit,
     # no yo: habia escrito que la excepcion no podia tapar un hallazgo vecino, y
     # lo resolvi para OTRAS lineas, no para la MISMA.
-    hits_sin_exc=$(printf '%s\n' "$hits" \
-      | sed -E 's#https://www\.habil\.mx/[a-z]{2}/(blog|cursos|courses|cours)(/[a-z0-9-]+)*/##g' \
-      | grep -E -- "$patron" || true)
-    if [ -z "$(printf '%s' "$hits_sin_exc" | tr -d '[:space:]')" ]; then
-      rc=0
-      exceptuadas=$((exceptuadas + 1))
+    # 🔴 Y FALLA CERRADO TAMBIEN AQUI. La version anterior remataba la tuberia con
+    # `|| true`: si el `sed` o el `grep` de esta comprobacion fallaban —salida 2—,
+    # el resultado quedaba VACIO, y el vacio se leia como «no quedan hallazgos»:
+    # la excepcion se concedia y el patron salia LIMPIO. Un error de busqueda se
+    # convertia en verde, lo contrario de lo que promete la cabecera. Lo encontro
+    # la revision automatica del commit del 7-oct-2026. Ahora se distinguen los
+    # tres desenlaces: 0 quedan hallazgos, 1 no queda ninguno, 2+ no se pudo.
+    resto=$(printf '%s\n' "$hits" | sed -E "s#$LIGAS_PUBLICAS##g"); src=$?
+    if [ "$src" -ne 0 ]; then
+      echo "⚠️  no se pudo recortar la liga permitida del patrón: $patron"
+      rc=2
     else
-      hits="$hits_sin_exc"
+      hits_sin_exc=$(printf '%s\n' "$resto" | grep -E -- "$patron"); grc=$?
+      case "$grc" in
+        0) hits="$hits_sin_exc" ;;
+        1) rc=0; exceptuadas=$((exceptuadas + 1)) ;;
+        *) echo "⚠️  no se pudo comprobar la excepción del patrón: $patron"
+           rc=2 ;;
+      esac
     fi
   fi
   case "$rc" in
