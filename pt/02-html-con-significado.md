@@ -293,7 +293,7 @@ Notificaciones: 310 ms
 
 Um detalhe que parece menor: o elemento [`<time>`](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/time). Dentro leva o texto que a pessoa vê (“7 de octubre de 2026, 10:30”, ou seja, 7 de outubro de 2026, 10h30), mas o seu atributo `datetime` leva a mesma data no formato que uma máquina entende: ano, mês, dia, hora e deslocamento em relação ao UTC (`-06:00` é a hora do centro do México, que desde 2022 já não muda por horário de verão). O texto pode mudar de idioma ou de estilo e o dado fica intacto. Os buscadores, as extensões e, mais adiante, o seu próprio JavaScript podem lê-lo sem interpretar “7 de octubre”.
 
-E uma pergunta que você fará em breve: por que não um `<br>` entre as linhas, ou espaços para recuar? Porque `<br>` significa “quebra de linha dentro de um mesmo parágrafo” (um poema, um endereço postal), não “um pouco mais de espaço”. O espaço é aparência e é trabalho do CSS. Toda vez que você usar uma marca de conteúdo para conseguir um efeito visual, está mentindo sobre o que algo é.
+E uma pergunta que você provavelmente vai fazer: por que não um `<br>` entre as linhas, ou espaços para recuar? Porque `<br>` significa “quebra de linha dentro de um mesmo parágrafo” (um poema, um endereço postal), não “um pouco mais de espaço”. O espaço é aparência e é trabalho do CSS. Toda vez que você usar uma marca de conteúdo para conseguir um efeito visual, está mentindo sobre o que algo é.
 
 ### 2.2 Dados em forma de tabela
 
