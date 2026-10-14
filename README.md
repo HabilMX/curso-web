@@ -1,6 +1,5 @@
 # Curso de Fundamentos de la web — de cero a un panel que cualquiera puede usar
 
-
 **Por Dorian Chávez, fundador de Hábil y arquitecto de integración.**
 
 **Cada lección de este curso se mide en cada cambio —su profundidad, que cumpla la plantilla, que las traducciones correspondan al español y que no se publique material interno—, y la comprobación se corre con un comando que cualquiera puede repetir.**
@@ -97,7 +96,7 @@ Cada página es un `figNN_NN.html` dentro de la carpeta de su lección, con su s
 | `programas/` | las páginas de las lecciones (con su salida esperada) |
 | `herramientas/` | los guiones que verifican el curso y las versiones fijadas de las herramientas |
 | `.github/workflows/verificar.yml` | la verificación automática que corre en cada cambio |
-| `verificar-publicable.sh` | revisa que el material no contenga rutas internas ni claves antes de publicarlo. Se corre en el repositorio de trabajo: lee una lista de patrones que no se publica, porque enumerarlos en claro delataría justo lo que protegen |
+
 | `LICENSE.md` | CC BY-SA 4.0 |
 
 ## La profundidad se mide
