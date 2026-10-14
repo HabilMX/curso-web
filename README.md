@@ -97,7 +97,7 @@ Cada página es un `figNN_NN.html` dentro de la carpeta de su lección, con su s
 | `programas/` | las páginas de las lecciones (con su salida esperada) |
 | `herramientas/` | los guiones que verifican el curso y las versiones fijadas de las herramientas |
 | `.github/workflows/verificar.yml` | la verificación automática que corre en cada cambio |
-| `verificar-publicable.sh` | revisa que el material no contenga rutas internas ni claves antes de publicarlo |
+| `verificar-publicable.sh` | revisa que el material no contenga rutas internas ni claves antes de publicarlo. Se corre en el repositorio de trabajo: lee una lista de patrones que no se publica, porque enumerarlos en claro delataría justo lo que protegen |
 | `LICENSE.md` | CC BY-SA 4.0 |
 
 ## La profundidad se mide
@@ -115,5 +115,5 @@ Se cuentan palabras y no líneas porque **las líneas se inflan**: una frase por
 - **Licencia CC BY-SA 4.0** (ver `LICENSE.md`): el material es público y se puede reusar citando la fuente.
 - **Multiidioma:** `es/` es el original; las otras cuatro son traducciones, y `herramientas/verificar-traducciones.sh` avisa cuando alguna quedó vieja respecto al español.
 - **El código no se traduce.** Los nombres de archivo, los datos y los identificadores quedan en inglés (`status`, `responseMs`, `available`, `down`); se traduce la prosa: las explicaciones, los ejercicios, los errores y el glosario. **Los textos que el panel muestra en pantalla van dentro del código, así que tampoco se traducen**: el código es idéntico en las cinco ediciones y el salto a la documentación técnica, que está en inglés, es menos abrupto.
-- `./verificar-publicable.sh` antes de publicar. Falla cerrado (si no pudo buscar, sale en error, no en verde) y trae autoprueba: siembra un patrón y exige detectarlo.
+- `./verificar-publicable.sh` antes de publicar, desde el repositorio de trabajo, que es donde vive su lista de patrones internos. Falla cerrado: si no pudo buscar, o si no llegó a revisar ni un patrón, sale en error y no en verde. Y trae autoprueba: siembra un patrón y exige detectarlo.
 - Sin emojis en los títulos de las lecciones.
