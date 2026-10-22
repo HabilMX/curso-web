@@ -24,6 +24,17 @@ printf "%-28s %-4s %s\n" "CAPÍTULO" "IDI" "ESTADO"
 printf "%-28s %-4s %s\n" "----------------------------" "---" "------"
 for fuente in es/*.md; do
   base=$(basename "$fuente")
+  # 🔴 LO QUE EMPIEZA CON «_» ES MATERIAL DE TRABAJO, NO UN CAPITULO: mapas de
+  # continuidad, listas de excepciones, notas del equipo. No se traduce nunca, asi
+  # que contarlo como «falta» pone en el reporte un numero que NO va a bajar jamas
+  # —medido el 7-oct-2026 en el curso de Python: 2 archivos x 4 idiomas = 8 faltas
+  # permanentes—. Y un numero que siempre esta ahi deja de leerse, que es como se
+  # pierde el hallazgo de verdad el dia que aparezca.
+  # ⚠️ Es el mismo criterio del `export-ignore` de `.gitattributes`: material de
+  # trabajo que se queda en el repositorio privado y no viaja a lo publico. Lo que
+  # NO cambia es que `verificar-publicable.sh` SI los revisa: se publican nunca,
+  # pero se miran siempre.
+  case "$base" in _*) continue ;; esac
   sha_actual=$(shasum -a 256 "$fuente" | cut -d' ' -f1)
   for idi in $IDIOMAS; do
     if [ ! -f "$idi/$base" ]; then

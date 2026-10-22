@@ -281,8 +281,11 @@ Avant le code, un nouvel outil et deux connus. À la fin, il y a une petite fonc
 // No toca el documento.
 
 export async function loadServices(url) {
-  // Paso 1: la respuesta.
-  const response = await fetch(url);
+  // Paso 1: la respuesta. Si no llega ninguna, el mensaje del navegador puede repetir
+  // la dirección completa, con lo que traiga dentro; se cambia por una frase fija.
+  const response = await fetch(url).catch(() => {
+    throw new Error("No se pudo conectar con el servidor.");
+  });
 
   // fetch NO rechaza con un 404 o un 500: hay que mirarlo.
   if (!response.ok) {
@@ -315,7 +318,7 @@ function isService(item) {
 Lis le code avec ces questions :
 
 - **Où sont les deux temps ?** Dans les deux lignes avec `await` : `await fetch(url)` apporte la réponse et `await response.json()` lit son corps. Entre les deux se trouve la vérification de `ok`, au seul endroit où elle a du sens : avec la réponse en main et avant de dépenser du temps sur le corps.
-- **Pourquoi n'y a-t-il aucun `try` ici ?** Parce que ce module ne décide rien au sujet des défaillances : si `fetch` est rompu ou si `json()` ne peut pas lire le corps, l'erreur poursuit son chemin vers celui qui a appelé `loadServices`, qui est celui qui sait quoi faire. Un `try` qui attrape une erreur seulement pour la relancer à l'identique n'apporte rien. Dans la leçon 9, ce fichier aura bien un `try`, parce que là chaque défaillance sera **traduite** en une phrase différente.
+- **Pourquoi n'y a-t-il aucun `try` ici, et que fait ce `.catch` ?** Ce module ne décide presque rien au sujet des défaillances : si `json()` ne peut pas lire le corps, l'erreur poursuit son chemin vers celui qui a appelé `loadServices`, qui est celui qui sait quoi faire. Un `try` qui attrape une erreur seulement pour la relancer à l'identique n'apporte rien. L'exception est la première ligne. Quand `fetch` est rompu, le message du navigateur peut répéter l'adresse complète, et une adresse peut contenir un utilisateur, un mot de passe ou une clé d'accès (`http://usuario:clave@…/estado?token=…`) ; ce message finirait dans la console ou, à partir de la leçon 9, à l'écran. C'est pourquoi le `.catch` de la promesse —le même que dans la figure 8.2— remplace ce rejet par une phrase fixe qui ne répète rien. Dans la leçon 9, ce fichier aura bien un `try`, parce que là chaque défaillance sera **traduite** en une phrase différente.
 - **Que font `Array.isArray` et `isService` ?** Ils vérifient la forme d'une donnée extérieure avant de la laisser passer. `Array.isArray` regarde que ce qui est arrivé est une liste ; `data.every(isService)` regarde que **chaque** élément est un objet avec `id`, `name` et `status` de type texte, et `responseMs` nombre ou `null`. La seconde vérification n'est pas un ornement. Un fichier avec `[null]` est du JSON parfaitement valide et c'est un tableau ; sans elle, ce `null` arriverait jusqu'à `summarize`, qui essaierait de lire `service.status` de `null`, et le programme s'arrêterait avec un `TypeError` loin de la cause. De même avec un `"responseMs": "120"` écrit entre guillemets : la moyenne additionnerait des textes. Une validation plus complète —valeurs permises, plages, clés en trop, messages qui disent *quel* élément a échoué— est le sujet de la leçon 6 du [cours de TypeScript](https://www.habil.mx/fr/cours/typescript/). Et l'autre défense reste en place : le tableau de bord dessine tout avec `textContent` et le badge utilise une liste fermée, donc un texte bizarre a l'air bizarre, mais n'exécute rien.
 
 **Étape 2 : l'état démarre vide.** Dans la leçon 7, `createState(services)` recevait les services, parce qu'au démarrage ils étaient déjà là. Maintenant non : à l'ouverture de la page, il n'y en a aucun, il faut les demander. Donc `createState()` ne reçoit plus rien et commence avec une liste vide, et une fonction apparaît, `loadSucceeded`, qui conserve ce qui est arrivé. Elle conserve aussi un nouveau champ, `checkedAt` : le **moment** où les données sont arrivées, ce que l'en-tête va afficher. Ce moment est passé par celui qui charge, comme un objet `Date` (`new Date()` en fabrique un avec la date et l'heure actuelles). Et elle désélectionne le service choisi, parce qu'après une nouvelle vérification la liste peut être différente et celui qui était choisi pourrait ne plus exister.

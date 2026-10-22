@@ -3,8 +3,11 @@
 // No toca el documento.
 
 export async function loadServices(url) {
-  // Paso 1: la respuesta.
-  const response = await fetch(url);
+  // Paso 1: la respuesta. Si no llega ninguna, el mensaje del navegador puede repetir
+  // la dirección completa, con lo que traiga dentro; se cambia por una frase fija.
+  const response = await fetch(url).catch(() => {
+    throw new Error("No se pudo conectar con el servidor.");
+  });
 
   // fetch NO rechaza con un 404 o un 500: hay que mirarlo.
   if (!response.ok) {

@@ -281,8 +281,11 @@ Before the code, one new tool and two familiar ones. At the end there is a small
 // No toca el documento.
 
 export async function loadServices(url) {
-  // Paso 1: la respuesta.
-  const response = await fetch(url);
+  // Paso 1: la respuesta. Si no llega ninguna, el mensaje del navegador puede repetir
+  // la dirección completa, con lo que traiga dentro; se cambia por una frase fija.
+  const response = await fetch(url).catch(() => {
+    throw new Error("No se pudo conectar con el servidor.");
+  });
 
   // fetch NO rechaza con un 404 o un 500: hay que mirarlo.
   if (!response.ok) {
@@ -315,7 +318,7 @@ function isService(item) {
 Read the code with these questions:
 
 - **Where are the two steps?** In the two lines with `await`: `await fetch(url)` brings the response and `await response.json()` reads its body. Between the two is the `ok` check, in the only place where it makes sense: with the response in hand and before spending time on the body.
-- **Why is there no `try` here?** Because this module decides nothing about failures: if `fetch` is rejected or `json()` cannot read the body, the error goes on its way to whoever called `loadServices`, who is the one who knows what to do. A `try` that catches an error only to throw it again the same adds nothing. In Lesson 9 this file will have a `try`, because there each failure will be **translated** into a different sentence.
+- **Why is there no `try` here, and what does that `.catch` do?** This module decides almost nothing about failures: if `json()` cannot read the body, the error goes on its way to whoever called `loadServices`, who is the one who knows what to do. A `try` that catches an error only to throw it again the same adds nothing. The exception is the first line. When `fetch` is rejected, the browser's message can repeat the full address, and an address can carry inside it a user, a password or an access key (`http://usuario:clave@…/estado?token=…`); that message would end up in the console or, from Lesson 9 on, on the screen. That is why the promise's `.catch` —the same one as in figure 8.2— swaps that rejection for a fixed sentence that repeats nothing. In Lesson 9 this file will have a `try`, because there each failure will be **translated** into a different sentence.
 - **What do `Array.isArray` and `isService` do?** They check the shape of a piece of outside data before letting it through. `Array.isArray` checks that what arrived is a list; `data.every(isService)` checks that **each** element is an object with a text `id`, `name` and `status`, and `responseMs` a number or `null`. The second check is not an ornament. A file with `[null]` is perfectly valid JSON and is an array; without it, that `null` would reach `summarize`, which would try to read `service.status` of `null`, and the program would stop with a `TypeError` far from the cause. The same with a `"responseMs": "120"` written between quotation marks: the average would add up texts. A more complete validation —allowed values, ranges, extra keys, messages that say *which* element failed— is the subject of Lesson 6 of the [TypeScript course](https://www.habil.mx/en/courses/typescript/). And the other defense is still standing: the dashboard draws everything with `textContent` and the badge uses a closed list, so a strange text looks strange, but executes nothing.
 
 **Step 2: the state starts empty.** In Lesson 7, `createState(services)` received the services, because they were already there at startup. Now they are not: when the page opens there are none yet, they have to be requested. So `createState()` no longer receives anything and starts with an empty list, and a function appears, `loadSucceeded`, that stores what arrived. It also stores a new field, `checkedAt`: the **moment** the data arrived, which is what the header is going to show. That moment is passed in by whoever loads, as a `Date` object (`new Date()` manufactures one with the current date and time). And it deselects the chosen service, because after a new check the list may be different and the chosen one may no longer exist.

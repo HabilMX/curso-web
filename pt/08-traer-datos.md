@@ -281,8 +281,11 @@ Antes do código, uma ferramenta nova e duas conhecidas. No final há uma funç�
 // No toca el documento.
 
 export async function loadServices(url) {
-  // Paso 1: la respuesta.
-  const response = await fetch(url);
+  // Paso 1: la respuesta. Si no llega ninguna, el mensaje del navegador puede repetir
+  // la dirección completa, con lo que traiga dentro; se cambia por una frase fija.
+  const response = await fetch(url).catch(() => {
+    throw new Error("No se pudo conectar con el servidor.");
+  });
 
   // fetch NO rechaza con un 404 o un 500: hay que mirarlo.
   if (!response.ok) {
@@ -315,7 +318,7 @@ function isService(item) {
 Leia o código com estas perguntas:
 
 - **Onde estão os dois passos?** Nas duas linhas com `await`: `await fetch(url)` traz a resposta e `await response.json()` lê o seu corpo. Entre as duas está a verificação de `ok`, no único lugar em que faz sentido: com a resposta na mão e antes de gastar tempo com o corpo.
-- **Por que não há nenhum `try` aqui?** Porque este módulo não decide nada sobre as falhas: se o `fetch` é rejeitado ou o `json()` não consegue ler o corpo, o erro segue o seu caminho até quem chamou `loadServices`, que é quem sabe o que fazer. Um `try` que captura um erro só para lançá-lo de novo igual não acrescenta nada. Na lição 9 este arquivo terá, sim, `try`, porque ali cada falha será **traduzida** em uma frase diferente.
+- **Por que não há nenhum `try` aqui, e o que faz esse `.catch`?** Este módulo quase não decide nada sobre as falhas: se o `json()` não consegue ler o corpo, o erro segue o seu caminho até quem chamou `loadServices`, que é quem sabe o que fazer. Um `try` que captura um erro só para lançá-lo de novo igual não acrescenta nada. A exceção é a primeira linha. Quando o `fetch` é rejeitado, a mensagem do navegador pode repetir o endereço completo, e um endereço pode levar dentro um usuário, uma senha ou uma chave de acesso (`http://usuario:clave@…/estado?token=…`); essa mensagem acabaria no console ou, a partir da lição 9, na tela. Por isso o `.catch` da promessa —o mesmo da figura 8.2— troca essa rejeição por uma frase fixa que não repete nada. Na lição 9 este arquivo terá, sim, `try`, porque ali cada falha será **traduzida** em uma frase diferente.
 - **O que fazem `Array.isArray` e `isService`?** Verificam a forma de um dado de fora antes de deixá-lo passar. `Array.isArray` confere que o que chegou seja uma lista; `data.every(isService)` confere que **cada** elemento seja um objeto com `id`, `name` e `status` de texto, e `responseMs` número ou `null`. A segunda verificação não é um enfeite. Um arquivo com `[null]` é JSON perfeitamente válido e é um array; sem ela, esse `null` chegaria até `summarize`, que tentaria ler `service.status` de `null`, e o programa pararia com um `TypeError` longe da causa. O mesmo com um `"responseMs": "120"` escrito entre aspas: a média somaria textos. Uma validação mais completa —valores permitidos, faixas, chaves sobrando, mensagens que digam *qual* elemento falhou— é o tema da lição 6 do [curso de TypeScript](https://www.habil.mx/pt/cursos/typescript/). E a outra defesa continua de pé: o painel desenha tudo com `textContent` e o selo usa uma lista fechada, então um texto estranho se vê estranho, mas não executa nada.
 
 **Passo 2: o estado começa vazio.** Na lição 7, `createState(services)` recebia os serviços, porque ao iniciar eles já estavam lá. Agora não: ao abrir a página ainda não há nenhum, é preciso pedi-los. Então `createState()` já não recebe nada e começa com uma lista vazia, e aparece uma função, `loadSucceeded`, que guarda o que chegou. Guarda também um campo novo, `checkedAt`: o **momento** em que os dados chegaram, que é o que o cabeçalho vai mostrar. Esse momento é passado por quem carrega, como um objeto `Date` (`new Date()` fabrica um com a data e a hora atuais). E ela desmarca o serviço escolhido, porque depois de uma nova verificação a lista pode ser diferente e o escolhido poderia já não existir.
