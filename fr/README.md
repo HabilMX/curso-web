@@ -1,4 +1,4 @@
-# Cours de Fondamentaux du web — de zéro à un tableau de bord que tout le monde peut utiliser
+# Cours de fondamentaux du web — de zéro à un tableau de bord que tout le monde peut utiliser
 
 **Par Dorian Chávez, fondateur de Hábil et architecte d'intégration.**
 
@@ -31,7 +31,7 @@ Il démarre à la leçon 2 et grandit à chaque leçon. C'est le même problème
 | 8 | [Récupérer des données : promesses, fetch et async/await](08-traer-datos.md) | le tableau de bord qui demande ses données à un fichier JSON | ce qu'est une promesse ; `fetch` en deux temps ; `response.ok` ; `async`/`await` |
 | 9 | [Quand quelque chose échoue : délais d'attente, états, CORS et plusieurs requêtes](09-cuando-algo-falla.md) | le tableau de bord qui dit toujours ce qui se passe | délai d'attente ; les trois états : chargement, erreur et vide ; l'erreur CORS ; plusieurs requêtes avec `Promise.allSettled` |
 | 10 | [Formulaires et validation](10-formularios-validacion.md) | ajouter et filtrer des services | la validation que le navigateur apporte déjà ; `:user-invalid` ; dire l'erreur pour qu'un lecteur d'écran l'annonce |
-| 11 | [Le tableau de bord terminé](11-el-panel-terminado.md) | le `revisor` publié | révision au clavier ; la CSP comme en-tête du serveur ; poids et performance ; publier un site statique |
+| 11 | [Le tableau de bord terminé](11-el-panel-terminado.md) | le `revisor` publié | vérification au clavier ; la CSP comme en-tête du serveur ; poids et performance ; publier un site statique |
 
 À la fin de chaque leçon, il y a des exercices avec leurs solutions. Et le [journal de bord](https://github.com/HabilMX/curso-web/blob/main/fr/bitacora.md) est à toi : note-y ce qui t'a coûté.
 
