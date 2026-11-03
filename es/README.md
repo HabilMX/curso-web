@@ -1,6 +1,6 @@
 # Curso de Fundamentos de la web — de cero a un panel que cualquiera puede usar
 
-**Por Dorian Chávez, fundador de Hábil y arquitecto de integración.**
+**Por Dorian Chávez, cofundador de Hábil y arquitecto de integración.**
 
 **Para quién es:** quien nunca ha escrito una página, y quien copia fragmentos que funcionan sin saber por qué. No se supone experiencia previa con ningún lenguaje: cada concepto se explica cuando aparece, y se explica por qué existe, no solo cómo se escribe.
 

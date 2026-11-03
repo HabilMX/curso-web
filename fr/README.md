@@ -1,6 +1,6 @@
 # Cours de fondamentaux du web — de zéro à un tableau de bord que tout le monde peut utiliser
 
-**Par Dorian Chávez, fondateur de Hábil et architecte d'intégration.**
+**Par Dorian Chávez, cofondateur de Hábil et architecte d'intégration.**
 
 **Pour qui :** pour celui qui n'a jamais écrit une page, et pour celui qui copie des fragments qui fonctionnent sans savoir pourquoi. On ne suppose aucune expérience préalable d'un langage : chaque concept est expliqué au moment où il apparaît, et on explique pourquoi il existe, pas seulement comment l'écrire.
 

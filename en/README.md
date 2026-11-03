@@ -1,6 +1,6 @@
 # Web Fundamentals Course — from zero to a dashboard anyone can use
 
-**By Dorian Chávez, founder of Hábil and integration architect.**
+**By Dorian Chávez, co-founder of Hábil and integration architect.**
 
 **Who it is for:** anyone who has never written a web page, and anyone who copies snippets that work without knowing why. No prior experience with any language is assumed: every concept is explained when it appears, and it is explained why it exists, not just how to write it.
 
