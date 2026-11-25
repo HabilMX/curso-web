@@ -37,7 +37,7 @@ Il démarre à la leçon 2 et grandit à chaque leçon. C'est le même problème
 
 ## Deux critères qui traversent tout le cours
 
-**L'accessibilité et la sécurité ne sont pas des leçons, ce sont des habitudes.** Il n'y a pas de module final sur l'accessibilité : il y a du HTML natif dans la 2, le clavier dans la 3, la 4 et la 5, `textContent` dans la 7, la validation native dans la 10 et la révision dans la 11. Un sujet laissé pour la fin est un sujet qu'on n'apprend pas.
+**L'accessibilité et la sécurité ne sont pas des leçons, ce sont des habitudes.** Il n'y a pas de module final sur l'accessibilité : il y a du HTML natif dans la 2, le clavier dans la 3, la 4 et la 5, `textContent` dans la 7, la validation native dans la 10 et la vérification dans la 11. Un sujet laissé pour la fin est un sujet qu'on n'apprend pas.
 
 **On n'enseigne que ce qui fonctionne déjà dans tous les navigateurs.** Ce qui n'est pas encore le cas apparaît dans un encadré « ce qui arrive », avec la consigne de ne pas l'utiliser en production. Un cours qui enseigne ce qui vient de sortir vieillit en six mois.
 

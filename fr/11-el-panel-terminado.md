@@ -1,10 +1,10 @@
 # Leçon 11 — Le tableau de bord terminé
 
-**Durée :** deux sessions d'environ 90 min. Une répartition qui marche : la première, « Le pourquoi avant le comment », la révision au clavier (11.1), la politique de sécurité du contenu (11.2) et la mesure du poids et des performances (11.3), avec le tableau de bord ouvert et les outils du navigateur à portée de main ; la seconde, publier le site (11.4), les cinq critères un par un sur l'adresse publiée (11.5) et les exercices. Si publier te prend plus de temps que prévu, c'est la session deux qui s'allonge : le compte et les étapes du service que tu choisis ne dépendent pas de toi.
+**Durée :** deux sessions d'environ 90 min. Une répartition qui marche : la première, « Le pourquoi avant le comment », la vérification au clavier (11.1), la politique de sécurité du contenu (11.2) et la mesure du poids et des performances (11.3), avec le tableau de bord ouvert et les outils du navigateur à portée de main ; la seconde, publier le site (11.4), les cinq critères un par un sur l'adresse publiée (11.5) et les exercices. Si publier te prend plus de temps que prévu, c'est la session deux qui s'allonge : le compte et les étapes du service que tu choisis ne dépendent pas de toi.
 
 **Ce que tu construis :** le `revisor` publié comme site statique, avec ses en-têtes de sécurité et ses chiffres mesurés
 
-**Ce que tu apprends :** la révision au clavier ; la politique de sécurité du contenu (CSP) comme en-tête du serveur ; poids et performances ; publier un site statique
+**Ce que tu apprends :** la vérification au clavier ; la politique de sécurité du contenu (CSP) comme en-tête du serveur ; poids et performances ; publier un site statique
 
 ## À la fin, tu seras capable de
 
@@ -30,7 +30,7 @@ Le cours, de plus, a promis un critère de sortie. Le [programme](README.md) dit
 | 4 | Il montre les trois états : chargement, erreur et vide | 9 | 11.5 |
 | 5 | Le texte qui vient de l'extérieur se dessine avec `textContent`, jamais avec `innerHTML` | 7 | 11.2 et 11.5 |
 
-La section 11.5 clôt les cinq avec une épreuve pour chacun. Avant cela, trois idées nouvelles : la politique de sécurité du contenu (11.2), mesurer le poids et les performances avant d'essayer de les améliorer (11.3) et publier un site statique (11.4). La 11.1 est une révision au clavier, pas une idée nouvelle.
+La section 11.5 clôt les cinq avec une épreuve pour chacun. Avant cela, trois idées nouvelles : la politique de sécurité du contenu (11.2), mesurer le poids et les performances avant d'essayer de les améliorer (11.3) et publier un site statique (11.4). La 11.1 est une vérification au clavier, pas une idée nouvelle.
 
 ### L'état du tableau de bord à la fin de la leçon 10
 
@@ -47,7 +47,7 @@ Tout dans cette leçon utilise ce que tu as déjà : le serveur habituel depuis 
 
 ## Les concepts
 
-### 11.1 La révision au clavier
+### 11.1 La vérification au clavier
 
 Le critère 1 dit que le tableau de bord se parcourt entièrement au clavier, sans utiliser la souris. Cela se vérifie en le faisant, pas en lisant le code. Il y a quatre questions, et chacune correspond à un critère des règles d'accessibilité (WCAG 2.2) :
 
@@ -111,7 +111,7 @@ document.documentElement.scrollWidth <= document.documentElement.clientWidth
 
 Si elle renvoie `false`, quelque chose déborde. Le tableau de bord arrive à cette leçon en le respectant depuis la leçon 5, qui a mis le tableau dans une boîte qui défile, et la leçon 7 a dû le défendre : le texte masqué des boutons « Ver detalle » s'échappait de cette boîte et étirait la page à 498 px, jusqu'à ce que `position: relative` sur `.table-scroll` le ramène à l'intérieur. C'est la leçon de ce critère : on ne le remplit pas une fois, on le remesure après chaque modification.
 
-**Les outils automatiques.** Avant de tenir la révision pour bonne, lance un auditeur. Dans cette leçon, on a utilisé axe-core 4.14.0, le moteur qui se trouve derrière beaucoup d'extensions d'accessibilité, sur le tableau de bord dans ses cinq situations (normale et les quatre cas de `?case=`) : zéro violation. Lighthouse aussi, que nous détaillons plus bas, a donné 100 en accessibilité. Mais un zéro ne veut pas dire « accessible » : il veut dire « aucun des défauts qu'une machine sait reconnaître ». Une machine peut voir qu'un champ a un libellé ; elle ne peut pas savoir si le message d'erreur se comprend. C'est pourquoi le parcours au clavier et, si tu peux, avec un lecteur d'écran, ne se remplace pas.
+**Les outils automatiques.** Avant de tenir la vérification pour bonne, lance un auditeur. Dans cette leçon, on a utilisé axe-core 4.14.0, le moteur qui se trouve derrière beaucoup d'extensions d'accessibilité, sur le tableau de bord dans ses cinq situations (normale et les quatre cas de `?case=`) : zéro violation. Lighthouse aussi, que nous détaillons plus bas, a donné 100 en accessibilité. Mais un zéro ne veut pas dire « accessible » : il veut dire « aucun des défauts qu'une machine sait reconnaître ». Une machine peut voir qu'un champ a un libellé ; elle ne peut pas savoir si le message d'erreur se comprend. C'est pourquoi le parcours au clavier et, si tu peux, avec un lecteur d'écran, ne se remplace pas.
 
 ### 11.2 La politique de sécurité du contenu, comme en-tête
 
@@ -762,7 +762,7 @@ Avec le tableau de bord servi depuis ton ordinateur et un profil de réseau lent
 
 **Exercice 1.** (a) Elle permet de tout charger, mais seulement depuis le même site, et comme `default-src` est la valeur de repli, elle couvre scripts, styles, images et connexions. Elle ne bloque rien de ce que fait le tableau de bord : tout vient de la même origine. Elle ne diffère que dans ce qu'elle **ne** couvre **pas** : elle n'inclut ni `form-action`, ni `base-uri`, ni `frame-ancestors`, qui ne retombent pas sur `default-src` ; autrement dit, elle est moins stricte que celle du tableau de bord ; avec elle, le tableau de bord s'affiche et fonctionne pareil. (b) Elle part de la même base, mais avec `'unsafe-inline'` dans `script-src` elle permet les scripts écrits dans le HTML. Elle ne casse rien au tableau de bord, et c'est la pire des deux : elle ferme beaucoup moins. La leçon : une politique qui « ne casse rien » n'est pas bonne pour autant ; il faut regarder ce qu'elle laisse ouvert.
 
-**Exercice 2.** Sans `connect-src`, la règle de repli `default-src 'none'` bloque le `fetch`. La personne voit « No se pudo conectar con el servidor. » (Impossible de se connecter au serveur.) avec le bouton « Reintentar » (le tableau de bord traite la défaillance du réseau comme n'importe quelle autre, et c'est une bonne raison pour laquelle `js/load.js` convertit les erreurs en messages). La console dit, dans Chrome 154 : « Connecting to 'http://127.0.0.1:…/data/services.json' violates the following Content Security Policy directive: "default-src 'none'". Note that 'connect-src' was not explicitly set, so 'default-src' is used as a fallback. The action has been blocked. », suivi de « Fetch API cannot load … Refused to connect because it violates the document's Content Security Policy ». On corrige en remettant `connect-src 'self';`. Ce qu'on apprend : le tableau de bord se dégrade avec élégance, mais la cause est dans la console, pas à l'écran.
+**Exercice 2.** Sans `connect-src`, la règle de repli `default-src 'none'` bloque le `fetch`. La personne voit « No se pudo conectar con el servidor. » (Impossible de se connecter au serveur.) avec le bouton « Reintentar » (le tableau de bord traite la défaillance du réseau comme n'importe quelle autre, et c'est une bonne raison pour laquelle `js/load.js` convertit les erreurs en messages). La console dit, dans Chrome 154 : « Connecting to `'http://127.0.0.1:…/data/services.json'` violates the following Content Security Policy directive: "default-src 'none'". Note that 'connect-src' was not explicitly set, so 'default-src' is used as a fallback. The action has been blocked. », suivi de « Fetch API cannot load … Refused to connect because it violates the document's Content Security Policy ». On corrige en remettant `connect-src 'self';`. Ce qu'on apprend : le tableau de bord se dégrade avec élégance, mais la cause est dans la console, pas à l'écran.
 
 **Exercice 3.** Les chiffres dépendent de ta machine ; ce qui doit ressortir, c'est la forme : avec `modulepreload`, la requête de `data/services.json` commence plus tôt et le tableau apparaît plus tôt ; le LCP, qui est le titre, ne bouge presque pas. Si tu ne vois pas de différence, ce n'est pas une erreur de l'exercice : avec un réseau local rapide et sans limite, la cascade est si courte qu'elle ne se remarque pas. Limite le réseau et réessaie. Si ton CLS était déjà 0 dans les deux cas, c'est aussi un résultat : le saut que nous avons corrigé apparaît quand le récapitulatif tarde à arriver, donc il peut ne pas se produire avec un réseau rapide.
 
